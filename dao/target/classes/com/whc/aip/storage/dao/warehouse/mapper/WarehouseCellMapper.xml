@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whc.aip.storage.dao.warehouse.WarehouseCellMapper" >
+  <resultMap id="BaseResultMap" type="com.whc.aip.storage.model.warehouse.WarehouseCell" >
+    <id column="WAHOCE_ID" property="id" jdbcType="VARCHAR" />
+    <result column="WAHO_ID" property="wahoId" jdbcType="VARCHAR" />
+    <result column="WAHOCE_NUMBER" property="number" jdbcType="VARCHAR" />
+    <result column="WAHOCE_SIZE" property="size" jdbcType="VARCHAR" />
+    <result column="WAHOCE_IMAGE1" property="image1" jdbcType="VARCHAR" />
+    <result column="WAHOCE_IMAGE2" property="image2" jdbcType="VARCHAR" />
+    <result column="WAHOCE_IMAGE3" property="image3" jdbcType="VARCHAR" />
+    <result column="WAHOCE_STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="WAHOCE_INTRODUCE" property="introduce" jdbcType="VARCHAR" />
+    <result column="WAHOCE_TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="WAHOCE_PRICE" property="price" jdbcType="VARCHAR" />
+    <result column="WAHOCE_DISCOUNT_PRICE" property="discountPrice" jdbcType="VARCHAR" />
+    <result column="WAHOCE_DPRICE" property="dprice" jdbcType="VARCHAR" />
+    <result column="WAHOCE_DISCOUNT_DPRICE" property="discountDprice" jdbcType="VARCHAR" />
+    <result column="CABINET_ID" property="cabinetId" jdbcType="VARCHAR" />
+    <result column="WAHOCE_KIND" property="kind" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    WAHOCE_ID, WAHO_ID, WAHOCE_NUMBER, WAHOCE_SIZE, WAHOCE_IMAGE1, WAHOCE_IMAGE2, WAHOCE_IMAGE3,
+    WAHOCE_STATUS, WAHOCE_INTRODUCE, WAHOCE_TYPE, WAHOCE_PRICE, WAHOCE_DISCOUNT_PRICE,
+    WAHOCE_DPRICE, WAHOCE_DISCOUNT_DPRICE, CABINET_ID, WAHOCE_KIND
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.whc.aip.storage.model.warehouse.WarehouseCellExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from WHC_WAREHOUSE_CELL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from WHC_WAREHOUSE_CELL
+    where WAHOCE_ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from WHC_WAREHOUSE_CELL
+    where WAHOCE_ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.whc.aip.storage.model.warehouse.WarehouseCellExample" >
+    delete from WHC_WAREHOUSE_CELL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.whc.aip.storage.model.warehouse.WarehouseCell" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      select sys_guid() from dual
+    </selectKey>
+    insert into WHC_WAREHOUSE_CELL (WAHOCE_ID, WAHO_ID, WAHOCE_NUMBER,
+    WAHOCE_SIZE, WAHOCE_IMAGE1, WAHOCE_IMAGE2,
+    WAHOCE_IMAGE3, WAHOCE_STATUS, WAHOCE_INTRODUCE,
+    WAHOCE_TYPE, WAHOCE_PRICE, WAHOCE_DISCOUNT_PRICE,
+    WAHOCE_DPRICE, WAHOCE_DISCOUNT_DPRICE, CABINET_ID,
+    WAHOCE_KIND)
+    values (#{id,jdbcType=VARCHAR}, #{wahoId,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR},
+    #{size,jdbcType=VARCHAR}, #{image1,jdbcType=VARCHAR}, #{image2,jdbcType=VARCHAR},
+    #{image3,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR},
+    #{type,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, #{discountPrice,jdbcType=VARCHAR},
+    #{dprice,jdbcType=VARCHAR}, #{discountDprice,jdbcType=VARCHAR}, #{cabinetId,jdbcType=VARCHAR},
+    #{kind,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.whc.aip.storage.model.warehouse.WarehouseCell" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      select sys_guid() from dual
+    </selectKey>
+    insert into WHC_WAREHOUSE_CELL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      WAHOCE_ID,
+      <if test="wahoId != null" >
+        WAHO_ID,
+      </if>
+      <if test="number != null" >
+        WAHOCE_NUMBER,
+      </if>
+      <if test="size != null" >
+        WAHOCE_SIZE,
+      </if>
+      <if test="image1 != null" >
+        WAHOCE_IMAGE1,
+      </if>
+      <if test="image2 != null" >
+        WAHOCE_IMAGE2,
+      </if>
+      <if test="image3 != null" >
+        WAHOCE_IMAGE3,
+      </if>
+      <if test="status != null" >
+        WAHOCE_STATUS,
+      </if>
+      <if test="introduce != null" >
+        WAHOCE_INTRODUCE,
+      </if>
+      <if test="type != null" >
+        WAHOCE_TYPE,
+      </if>
+      <if test="price != null" >
+        WAHOCE_PRICE,
+      </if>
+      <if test="discountPrice != null" >
+        WAHOCE_DISCOUNT_PRICE,
+      </if>
+      <if test="dprice != null" >
+        WAHOCE_DPRICE,
+      </if>
+      <if test="discountDprice != null" >
+        WAHOCE_DISCOUNT_DPRICE,
+      </if>
+      <if test="cabinetId != null" >
+        CABINET_ID,
+      </if>
+      <if test="kind != null" >
+        WAHOCE_KIND,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=VARCHAR},
+      <if test="wahoId != null" >
+        #{wahoId,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="image1 != null" >
+        #{image1,jdbcType=VARCHAR},
+      </if>
+      <if test="image2 != null" >
+        #{image2,jdbcType=VARCHAR},
+      </if>
+      <if test="image3 != null" >
+        #{image3,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="discountPrice != null" >
+        #{discountPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="dprice != null" >
+        #{dprice,jdbcType=VARCHAR},
+      </if>
+      <if test="discountDprice != null" >
+        #{discountDprice,jdbcType=VARCHAR},
+      </if>
+      <if test="cabinetId != null" >
+        #{cabinetId,jdbcType=VARCHAR},
+      </if>
+      <if test="kind != null" >
+        #{kind,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.whc.aip.storage.model.warehouse.WarehouseCellExample" resultType="java.lang.Integer" >
+    select count(*) from WHC_WAREHOUSE_CELL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update WHC_WAREHOUSE_CELL
+    <set >
+      <if test="record.id != null" >
+        WAHOCE_ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wahoId != null" >
+        WAHO_ID = #{record.wahoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        WAHOCE_NUMBER = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size != null" >
+        WAHOCE_SIZE = #{record.size,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image1 != null" >
+        WAHOCE_IMAGE1 = #{record.image1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image2 != null" >
+        WAHOCE_IMAGE2 = #{record.image2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image3 != null" >
+        WAHOCE_IMAGE3 = #{record.image3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        WAHOCE_STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.introduce != null" >
+        WAHOCE_INTRODUCE = #{record.introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        WAHOCE_TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        WAHOCE_PRICE = #{record.price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discountPrice != null" >
+        WAHOCE_DISCOUNT_PRICE = #{record.discountPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dprice != null" >
+        WAHOCE_DPRICE = #{record.dprice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discountDprice != null" >
+        WAHOCE_DISCOUNT_DPRICE = #{record.discountDprice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cabinetId != null" >
+        CABINET_ID = #{record.cabinetId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kind != null" >
+        WAHOCE_KIND = #{record.kind,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update WHC_WAREHOUSE_CELL
+    set WAHOCE_ID = #{record.id,jdbcType=VARCHAR},
+    WAHO_ID = #{record.wahoId,jdbcType=VARCHAR},
+    WAHOCE_NUMBER = #{record.number,jdbcType=VARCHAR},
+    WAHOCE_SIZE = #{record.size,jdbcType=VARCHAR},
+    WAHOCE_IMAGE1 = #{record.image1,jdbcType=VARCHAR},
+    WAHOCE_IMAGE2 = #{record.image2,jdbcType=VARCHAR},
+    WAHOCE_IMAGE3 = #{record.image3,jdbcType=VARCHAR},
+    WAHOCE_STATUS = #{record.status,jdbcType=VARCHAR},
+    WAHOCE_INTRODUCE = #{record.introduce,jdbcType=VARCHAR},
+    WAHOCE_TYPE = #{record.type,jdbcType=VARCHAR},
+    WAHOCE_PRICE = #{record.price,jdbcType=VARCHAR},
+    WAHOCE_DISCOUNT_PRICE = #{record.discountPrice,jdbcType=VARCHAR},
+    WAHOCE_DPRICE = #{record.dprice,jdbcType=VARCHAR},
+    WAHOCE_DISCOUNT_DPRICE = #{record.discountDprice,jdbcType=VARCHAR},
+    CABINET_ID = #{record.cabinetId,jdbcType=VARCHAR},
+    WAHOCE_KIND = #{record.kind,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.whc.aip.storage.model.warehouse.WarehouseCell" >
+    update WHC_WAREHOUSE_CELL
+    <set >
+      <if test="wahoId != null" >
+        WAHO_ID = #{wahoId,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        WAHOCE_NUMBER = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        WAHOCE_SIZE = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="image1 != null" >
+        WAHOCE_IMAGE1 = #{image1,jdbcType=VARCHAR},
+      </if>
+      <if test="image2 != null" >
+        WAHOCE_IMAGE2 = #{image2,jdbcType=VARCHAR},
+      </if>
+      <if test="image3 != null" >
+        WAHOCE_IMAGE3 = #{image3,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        WAHOCE_STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        WAHOCE_INTRODUCE = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        WAHOCE_TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        WAHOCE_PRICE = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="discountPrice != null" >
+        WAHOCE_DISCOUNT_PRICE = #{discountPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="dprice != null" >
+        WAHOCE_DPRICE = #{dprice,jdbcType=VARCHAR},
+      </if>
+      <if test="discountDprice != null" >
+        WAHOCE_DISCOUNT_DPRICE = #{discountDprice,jdbcType=VARCHAR},
+      </if>
+      <if test="cabinetId != null" >
+        CABINET_ID = #{cabinetId,jdbcType=VARCHAR},
+      </if>
+      <if test="kind != null" >
+        WAHOCE_KIND = #{kind,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WAHOCE_ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.whc.aip.storage.model.warehouse.WarehouseCell" >
+    update WHC_WAREHOUSE_CELL
+    set WAHO_ID = #{wahoId,jdbcType=VARCHAR},
+      WAHOCE_NUMBER = #{number,jdbcType=VARCHAR},
+      WAHOCE_SIZE = #{size,jdbcType=VARCHAR},
+      WAHOCE_IMAGE1 = #{image1,jdbcType=VARCHAR},
+      WAHOCE_IMAGE2 = #{image2,jdbcType=VARCHAR},
+      WAHOCE_IMAGE3 = #{image3,jdbcType=VARCHAR},
+      WAHOCE_STATUS = #{status,jdbcType=VARCHAR},
+      WAHOCE_INTRODUCE = #{introduce,jdbcType=VARCHAR},
+      WAHOCE_TYPE = #{type,jdbcType=VARCHAR},
+      WAHOCE_PRICE = #{price,jdbcType=VARCHAR},
+      WAHOCE_DISCOUNT_PRICE = #{discountPrice,jdbcType=VARCHAR},
+      WAHOCE_DPRICE = #{dprice,jdbcType=VARCHAR},
+      WAHOCE_DISCOUNT_DPRICE = #{discountDprice,jdbcType=VARCHAR},
+      CABINET_ID = #{cabinetId,jdbcType=VARCHAR},
+      WAHOCE_KIND = #{kind,jdbcType=VARCHAR}
+    where WAHOCE_ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="getWahouseCellCountMap" type="com.whc.aip.storage.model.warehouse.WarehouseCellCount">
+    <result column="allCabi" property="allCabi" jdbcType="VARCHAR" />
+    <result column="smaCabi" property="smaCabi" jdbcType="VARCHAR" />
+    <result column="medCabi" property="medCabi" jdbcType="VARCHAR" />
+    <result column="bigCabi" property="bigCabi" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="getWahouseCellCount" resultMap="getWahouseCellCountMap">
+    with ware as (
+    select
+    t.wahoce_id waceId,
+    t.waho_id wahoId,
+    t.wahoce_number wahoceNumber,
+    t.wahoce_size wahoceSize,
+    case when t.cabinet_id is null then '1' else t.wahoce_status end as wahoceStatus,
+    t.wahoce_type wahoceTpe,
+    t.wahoce_Kind wahoceKind
+    from whc_warehouse_cell t
+    )
+    select
+    count(wa.wahoceSize) as "allCabi",
+    count(case when wa.wahoceSize = '1' then '1' end) as "smaCabi",
+    count(case when wa.wahoceSize = '2' then '2' end) as "medCabi",
+    count(case when wa.wahoceSize = '3' then '3' end) as "bigCabi"
+    from ware wa where wa.wahoceStatus = '0' and wahoceKind='1' and wahoId=#{wahoId}
+  </select>
+  <resultMap id="getWarehouseCellInfoMap" type="com.whc.aip.storage.model.warehouse.WarehouseCellInfo">
+    <result column="waceId" property="waceId" jdbcType="VARCHAR" />
+    <result column="wahoId" property="wahoId" jdbcType="VARCHAR" />
+    <result column="wahoceNumber" property="wahoceNumber" jdbcType="VARCHAR" />
+    <result column="wahoceSize" property="wahoceSize" jdbcType="VARCHAR" />
+    <result column="wahoceStatus" property="wahoceStatus" jdbcType="VARCHAR" />
+    <result column="wahoceTpe" property="wahoceTpe" jdbcType="VARCHAR" />
+    <result column="wahoceKind" property="wahoceKind" jdbcType="VARCHAR" />
+    <result column="wahoceName" property="wahoceName" jdbcType="VARCHAR" />
+    <result column="waceTimePrice" property="waceTimePrice" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="getWarehouseCellInfo" resultMap="getWarehouseCellInfoMap">
+    select * from(
+         select
+        t.wahoce_id as "waceId",
+        t.waho_id as "wahoId",
+        t.wahoce_number as "wahoceNumber",
+        t.wahoce_size as "wahoceSize",
+         case when t.cabinet_id is null then '1' else t.wahoce_status end as "wahoceStatus",
+        t.wahoce_type as "wahoceTpe",
+        t.wahoce_Kind as "wahoceKind",
+        waty.waty_name as "wahoceName",
+         case when t.wahoce_size='1' then TO_CHAR(to_number(p."imwapr_size1_price"),'990.99')
+             when t.wahoce_size='2' then TO_CHAR(to_number(p."imwapr_size2_price"),'990.99')
+             when t.wahoce_size='3' then TO_CHAR(to_number(p."imwapr_size3_price"),'990.99')
+             when t.wahoce_size='4' then TO_CHAR(to_number(p."imwapr_size4_price"),'990.99')
+             else '' end as "waceTimePrice"
+
+         from (
+        select * from whc_warehouse_cell c where
+        c.waho_id=#{wahoId} and
+        c.wahoce_type ='8'
+        ) t
+           left join (
+                  select min(t.imwapr_size1_price)as "imwapr_size1_price",min(t.imwapr_size2_price) as "imwapr_size2_price",min(t.imwapr_size3_price) as "imwapr_size3_price",min(t.imwapr_size4_price)as "imwapr_size4_price",min(t.waho_id) as "wahoId" from (
+                  select
+                  p.waho_id,
+                   to_number(p.imwapr_size1_price) as imwapr_size1_price,
+                  to_number(p.imwapr_size2_price) as imwapr_size2_price,
+                  to_number(p.imwapr_size3_price) as imwapr_size3_price,
+                  to_number(p.imwapr_size4_price) as imwapr_size4_price
+                  from whc_immediate_wahoce_price p where p.waho_id=#{wahoId}
+                  )t) p on p."wahoId"=t.waho_id
+        left join whc_wahoce_type waty on waty.waty_code = t.wahoce_type
+   union all
+
+   select
+        t.wahoce_id as "waceId",
+        t.waho_id as "wahoId",
+        t.wahoce_number as "wahoceNumber",
+        t.wahoce_size as "wahoceSize",
+        case when t.cabinet_id is null then '3' else t.wahoce_status end as "wahoceStatus",
+        t.wahoce_type as "wahoceTpe",
+        t.wahoce_Kind as "wahoceKind",
+        waty.waty_name as "wahoceName",
+          case when t.wahoce_size='1' then TO_CHAR(to_number(p."inwapr_size1_price"),'990.99')
+             when t.wahoce_size='2' then TO_CHAR(to_number(p."inwapr_size2_price"),'990.99')
+             when t.wahoce_size='3' then TO_CHAR(to_number(p."inwapr_size3_price"),'990.99')
+             when t.wahoce_size='4' then TO_CHAR(to_number(p."inwapr_size4_price"),'990.99')
+             when t.wahoce_size='5' then TO_CHAR(to_number(p."inwapr_size5_price"),'990.99')
+             else '' end as "waceTimePrice"
+         from (
+        select * from whc_warehouse_cell c
+        where
+                c.waho_id=#{wahoId} and
+                c.wahoce_type ='10'
+        ) t left join (
+                  select min(t.inwapr_size1_price)as "inwapr_size1_price",min(t.inwapr_size2_price) as "inwapr_size2_price",min(t.inwapr_size3_price) as "inwapr_size3_price",min(t.inwapr_size4_price)as "inwapr_size4_price",min(t.inwapr_size5_price)as "inwapr_size5_price",min(t.waho_id) as "wahoId" from (
+                  select
+                  p.waho_id,
+                  to_number(p.inwapr_size1_price) as inwapr_size1_price,
+                  to_number(p.inwapr_size2_price) as inwapr_size2_price,
+                  to_number(p.inwapr_size3_price) as inwapr_size3_price,
+                  to_number(p.inwapr_size4_price) as inwapr_size4_price,
+                  to_number(p.inwapr_size5_price) as inwapr_size5_price
+                  from whc_intelligence_wahoce_price p where p.waho_id=#{wahoId}
+                  )t) p on p."wahoId"=t.waho_id
+        left join whc_wahoce_type waty on waty.waty_code = t.wahoce_type
+    )t1
+  order by t1."wahoceTpe", to_number(REGEXP_REPLACE(t1."wahoceNumber",'[^0-9]',''))
+  </select>
+  <resultMap id="getWahoceMap" type="com.whc.aip.storage.model.warehouse.Wahoce">
+    <result column="wahoId" property="wahoId" jdbcType="VARCHAR" />
+    <result column="wahoName" property="wahoName" jdbcType="VARCHAR" />
+    <result column="wahoceNumber" property="wahoceNumber" jdbcType="VARCHAR" />
+    <result column="wahoceId" property="wahoceId" jdbcType="VARCHAR" />
+    <result column="wahoceSize" property="wahoceSize" jdbcType="VARCHAR" />
+    <result column="hourRenew" property="hourRenew" jdbcType="VARCHAR" />
+    <result column="hourStart" property="hourStart" jdbcType="VARCHAR" />
+    <result column="dayRenew" property="dayRenew" jdbcType="VARCHAR" />
+    <result column="dayStart" property="dayStart" jdbcType="VARCHAR" />
+    <result column="monthRenew" property="monthRenew" jdbcType="VARCHAR" />
+    <result column="monthStart" property="monthStart" jdbcType="VARCHAR" />
+    <result column="adv1" property="adv1" jdbcType="VARCHAR" />
+    <result column="adv2" property="adv2" jdbcType="VARCHAR" />
+    <result column="adv3" property="adv3" jdbcType="VARCHAR" />
+    <result column="wahoType" property="wahoType" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="getWahoce" resultMap="getWahoceMap">
+    select ww.waho_id as "wahoId",
+	    ww.waho_name as "wahoName",
+	    wwa.wahoce_number as "wahoceNumber",
+	    wwa.wahoce_id as "wahoceId",
+	    wwa.wahoce_size as "wahoceSize",
+	    ww.waho_hour_renew as "hourRenew",
+	    ww.waho_hour_start as "hourStart",
+	    ww.waho_day_renew as "dayRenew",
+	    ww.waho_day_start as "dayStart",
+	    ww.waho_month_renew as "monthRenew",
+	    ww.waho_month_start as "monthStart",
+	    ww.waho_adv1 as "adv1",
+	    ww.waho_adv2 as "adv2",
+	    ww.waho_adv3 as "adv3",
+	    ww.WAHO_TYPE as "wahoType"
+	from whc_warehouse_cell wwa
+	left join whc_warehouse ww on wwa.waho_id=ww.waho_id
+	where 1=1 and wwa.wahoce_id=#{wahoceId}
+  </select>
+  <resultMap id="getMemberVoucherMap" type="com.whc.aip.storage.model.voucher.VoucherMember">
+    <result column="voucherId" property="voucherId" jdbcType="VARCHAR" />
+    <result column="voucherCode" property="voucherCode" jdbcType="VARCHAR" />
+    <result column="voucherUnit" property="voucherUnit" jdbcType="VARCHAR" />
+    <result column="voucherAmount" property="voucherAmount" jdbcType="VARCHAR" />
+    <result column="memberId" property="memberId" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="getMemberVoucher" resultMap="getMemberVoucherMap">
+    select wv.VOUCHER_ID as "voucherId",
+    wv.voucher_code as "voucherCode",
+    wv.voucher_unit as "voucherUnit",
+    wv.voucher_amount as "voucherAmount",
+    wv.MEMBER_ID as "memberId"
+    from whc_voucher wv where 1=1
+    and wv.MEMBER_ID in (select wm.MEMBER_ID as "meberId" from whc_member wm where 1=1 and wm.open_id=#{openId} )
+    and wv.voucher_status = '3' order by wv.voucher_create_time
+  </select>
+  <resultMap id="getWahoIdMap" type="com.whc.aip.storage.model.warehouse.WarehouseCell">
+    <result column="wahoId" property="wahoId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="getWahoId" resultMap="getWahoIdMap">
+    select c.waho_id as "wahoId",c.wahoce_status as "status" from whc_warehouse_cell c where c.wahoce_id=#{wahoceId}
+  </select>
+</mapper>

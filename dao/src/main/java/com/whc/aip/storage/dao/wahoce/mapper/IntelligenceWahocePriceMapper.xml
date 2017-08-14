@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whc.aip.storage.dao.wahoce.IntelligenceWahocePriceMapper" >
+  <resultMap id="BaseResultMap" type="com.whc.aip.storage.model.wahoce.IntelligenceWahocePrice" >
+    <result column="INWAPR_ID" property="id" jdbcType="VARCHAR" />
+    <result column="WAHO_ID" property="wahoId" jdbcType="VARCHAR" />
+    <result column="INWAPR_BEIGIN_TIME" property="beginTime" jdbcType="VARCHAR" />
+    <result column="INWAPR_END_TIME" property="endTime" jdbcType="VARCHAR" />
+    <result column="INWAPR_CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="INWAPR_SIZE1_PRICE" property="size1Price" jdbcType="VARCHAR" />
+    <result column="INWAPR_SIZE2_PRICE" property="size2Price" jdbcType="VARCHAR" />
+    <result column="INWAPR_SIZE3_PRICE" property="size3Price" jdbcType="VARCHAR" />
+    <result column="INWAPR_SIZE4_PRICE" property="size4Price" jdbcType="VARCHAR" />
+    <result column="INWAPR_SIZE5_PRICE" property="size5Price" jdbcType="VARCHAR" />
+    <result column="INWAPR_SIZE6_PRICE" property="size6Price" jdbcType="VARCHAR" />
+    <result column="INWAPR_SIZE7_PRICE" property="size7Price" jdbcType="VARCHAR" />
+    <result column="INWAPR_SIZE8_PRICE" property="size8Price" jdbcType="VARCHAR" />
+    <result column="INWAPR_ISDEL" property="isDel" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    INWAPR_ID, WAHO_ID, INWAPR_BEIGIN_TIME, INWAPR_END_TIME, INWAPR_CREATE_TIME, INWAPR_SIZE1_PRICE, 
+    INWAPR_SIZE2_PRICE, INWAPR_SIZE3_PRICE, INWAPR_SIZE4_PRICE, INWAPR_SIZE5_PRICE, INWAPR_SIZE6_PRICE, 
+    INWAPR_SIZE7_PRICE, INWAPR_SIZE8_PRICE, INWAPR_ISDEL
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.whc.aip.storage.model.wahoce.IntelligenceWahocePriceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from WHC_INTELLIGENCE_WAHOCE_PRICE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.whc.aip.storage.model.wahoce.IntelligenceWahocePriceExample" >
+    delete from WHC_INTELLIGENCE_WAHOCE_PRICE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.whc.aip.storage.model.wahoce.IntelligenceWahocePrice" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      select sys_guid() from dual
+    </selectKey>
+    insert into WHC_INTELLIGENCE_WAHOCE_PRICE (INWAPR_ID, WAHO_ID, INWAPR_BEIGIN_TIME, 
+      INWAPR_END_TIME, INWAPR_CREATE_TIME, INWAPR_SIZE1_PRICE, 
+      INWAPR_SIZE2_PRICE, INWAPR_SIZE3_PRICE, INWAPR_SIZE4_PRICE, 
+      INWAPR_SIZE5_PRICE, INWAPR_SIZE6_PRICE, INWAPR_SIZE7_PRICE, 
+      INWAPR_SIZE8_PRICE, INWAPR_ISDEL)
+    values (#{id,jdbcType=VARCHAR}, #{wahoId,jdbcType=VARCHAR}, #{beginTime,jdbcType=VARCHAR}, 
+      #{endTime,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{size1Price,jdbcType=VARCHAR}, 
+      #{size2Price,jdbcType=VARCHAR}, #{size3Price,jdbcType=VARCHAR}, #{size4Price,jdbcType=VARCHAR}, 
+      #{size5Price,jdbcType=VARCHAR}, #{size6Price,jdbcType=VARCHAR}, #{size7Price,jdbcType=VARCHAR}, 
+      #{size8Price,jdbcType=VARCHAR}, #{isDel,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.whc.aip.storage.model.wahoce.IntelligenceWahocePrice" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      select sys_guid() from dual
+    </selectKey>
+    insert into WHC_INTELLIGENCE_WAHOCE_PRICE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      INWAPR_ID,
+      <if test="wahoId != null" >
+        WAHO_ID,
+      </if>
+      <if test="beginTime != null" >
+        INWAPR_BEIGIN_TIME,
+      </if>
+      <if test="endTime != null" >
+        INWAPR_END_TIME,
+      </if>
+      <if test="createTime != null" >
+        INWAPR_CREATE_TIME,
+      </if>
+      <if test="size1Price != null" >
+        INWAPR_SIZE1_PRICE,
+      </if>
+      <if test="size2Price != null" >
+        INWAPR_SIZE2_PRICE,
+      </if>
+      <if test="size3Price != null" >
+        INWAPR_SIZE3_PRICE,
+      </if>
+      <if test="size4Price != null" >
+        INWAPR_SIZE4_PRICE,
+      </if>
+      <if test="size5Price != null" >
+        INWAPR_SIZE5_PRICE,
+      </if>
+      <if test="size6Price != null" >
+        INWAPR_SIZE6_PRICE,
+      </if>
+      <if test="size7Price != null" >
+        INWAPR_SIZE7_PRICE,
+      </if>
+      <if test="size8Price != null" >
+        INWAPR_SIZE8_PRICE,
+      </if>
+      <if test="isDel != null" >
+        INWAPR_ISDEL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=VARCHAR},
+      <if test="wahoId != null" >
+        #{wahoId,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null" >
+        #{beginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="size1Price != null" >
+        #{size1Price,jdbcType=VARCHAR},
+      </if>
+      <if test="size2Price != null" >
+        #{size2Price,jdbcType=VARCHAR},
+      </if>
+      <if test="size3Price != null" >
+        #{size3Price,jdbcType=VARCHAR},
+      </if>
+      <if test="size4Price != null" >
+        #{size4Price,jdbcType=VARCHAR},
+      </if>
+      <if test="size5Price != null" >
+        #{size5Price,jdbcType=VARCHAR},
+      </if>
+      <if test="size6Price != null" >
+        #{size6Price,jdbcType=VARCHAR},
+      </if>
+      <if test="size7Price != null" >
+        #{size7Price,jdbcType=VARCHAR},
+      </if>
+      <if test="size8Price != null" >
+        #{size8Price,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.whc.aip.storage.model.wahoce.IntelligenceWahocePriceExample" resultType="java.lang.Integer" >
+    select count(*) from WHC_INTELLIGENCE_WAHOCE_PRICE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update WHC_INTELLIGENCE_WAHOCE_PRICE
+    <set >
+      <if test="record.id != null" >
+        INWAPR_ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wahoId != null" >
+        WAHO_ID = #{record.wahoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beginTime != null" >
+        INWAPR_BEIGIN_TIME = #{record.beginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endTime != null" >
+        INWAPR_END_TIME = #{record.endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        INWAPR_CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size1Price != null" >
+        INWAPR_SIZE1_PRICE = #{record.size1Price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size2Price != null" >
+        INWAPR_SIZE2_PRICE = #{record.size2Price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size3Price != null" >
+        INWAPR_SIZE3_PRICE = #{record.size3Price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size4Price != null" >
+        INWAPR_SIZE4_PRICE = #{record.size4Price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size5Price != null" >
+        INWAPR_SIZE5_PRICE = #{record.size5Price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size6Price != null" >
+        INWAPR_SIZE6_PRICE = #{record.size6Price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size7Price != null" >
+        INWAPR_SIZE7_PRICE = #{record.size7Price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size8Price != null" >
+        INWAPR_SIZE8_PRICE = #{record.size8Price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDel != null" >
+        INWAPR_ISDEL = #{record.isDel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update WHC_INTELLIGENCE_WAHOCE_PRICE
+    set INWAPR_ID = #{record.id,jdbcType=VARCHAR},
+      WAHO_ID = #{record.wahoId,jdbcType=VARCHAR},
+      INWAPR_BEIGIN_TIME = #{record.beginTime,jdbcType=VARCHAR},
+      INWAPR_END_TIME = #{record.endTime,jdbcType=VARCHAR},
+      INWAPR_CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      INWAPR_SIZE1_PRICE = #{record.size1Price,jdbcType=VARCHAR},
+      INWAPR_SIZE2_PRICE = #{record.size2Price,jdbcType=VARCHAR},
+      INWAPR_SIZE3_PRICE = #{record.size3Price,jdbcType=VARCHAR},
+      INWAPR_SIZE4_PRICE = #{record.size4Price,jdbcType=VARCHAR},
+      INWAPR_SIZE5_PRICE = #{record.size5Price,jdbcType=VARCHAR},
+      INWAPR_SIZE6_PRICE = #{record.size6Price,jdbcType=VARCHAR},
+      INWAPR_SIZE7_PRICE = #{record.size7Price,jdbcType=VARCHAR},
+      INWAPR_SIZE8_PRICE = #{record.size8Price,jdbcType=VARCHAR},
+      INWAPR_ISDEL = #{record.isDel,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="getIntelligenceWahocePriceMap" type="com.whc.aip.storage.model.wahoce.ImmediateWahocePrice">
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="beginTime" property="beginTime" jdbcType="VARCHAR" />
+    <result column="endTime" property="endTime" jdbcType="VARCHAR" />
+    <result column="size1Price" property="size1Price" jdbcType="VARCHAR" />
+    <result column="size2Price" property="size2Price" jdbcType="VARCHAR" />
+    <result column="size3Price" property="size3Price" jdbcType="VARCHAR" />
+    <result column="size4Price" property="size4Price" jdbcType="VARCHAR" />
+    <result column="size5Price" property="size5Price" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="getIntelligenceWahocePrice" resultMap="getIntelligenceWahocePriceMap">
+select
+      p.inwapr_id as "id",
+      p.inwapr_beigin_time as "beginTime",
+      p.inwapr_end_time as "endTime",
+      p.inwapr_size1_price as "size1Price",
+      p.inwapr_size2_price as "size2Price",
+      p.inwapr_size3_price as "size3Price",
+      p.inwapr_size4_price as "size4Price",
+      p.inwapr_size5_price as "size5Price"
+    from whc_intelligence_wahoce_price p
+    where p.waho_id= #{wahoId}
+    order by to_number(p.inwapr_beigin_time)
+  </select>
+</mapper>

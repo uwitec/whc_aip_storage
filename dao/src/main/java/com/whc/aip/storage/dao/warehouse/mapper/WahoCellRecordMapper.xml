@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whc.aip.storage.dao.warehouse.WahoCellRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.whc.aip.storage.model.warehouse.WahoCellRecord" >
+    <id column="WAHO_CELL_RECORD_ID" property="id" jdbcType="VARCHAR" />
+    <result column="WAHO_CELL_RECORD_START" property="wahoCellRecordStart" jdbcType="VARCHAR" />
+    <result column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+    <result column="WAHO_CELL_RECORD_END" property="wahoCellRecordEnd" jdbcType="VARCHAR" />
+    <result column="WAHOCE_ID" property="wahoceId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WAHO_CELL_RECORD_ID, WAHO_CELL_RECORD_START, ORDER_ID, WAHO_CELL_RECORD_END, WAHOCE_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from WHC_WAHO_CELL_RECORD
+    where WAHO_CELL_RECORD_ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.whc.aip.storage.model.warehouse.WahoCellRecord" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      select sys_guid() from dual
+    </selectKey>
+    insert into WHC_WAHO_CELL_RECORD (WAHO_CELL_RECORD_ID, WAHO_CELL_RECORD_START, ORDER_ID, 
+      WAHO_CELL_RECORD_END, WAHOCE_ID)
+    values (#{id,jdbcType=VARCHAR}, #{wahoCellRecordStart,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, 
+      #{wahoCellRecordEnd,jdbcType=VARCHAR}, #{wahoceId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.whc.aip.storage.model.warehouse.WahoCellRecord" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      select sys_guid() from dual
+    </selectKey>
+    insert into WHC_WAHO_CELL_RECORD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      WAHO_CELL_RECORD_ID,
+      <if test="wahoCellRecordStart != null" >
+        WAHO_CELL_RECORD_START,
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="wahoCellRecordEnd != null" >
+        WAHO_CELL_RECORD_END,
+      </if>
+      <if test="wahoceId != null" >
+        WAHOCE_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=VARCHAR},
+      <if test="wahoCellRecordStart != null" >
+        #{wahoCellRecordStart,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="wahoCellRecordEnd != null" >
+        #{wahoCellRecordEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="wahoceId != null" >
+        #{wahoceId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.whc.aip.storage.model.warehouse.WahoCellRecord" >
+    update WHC_WAHO_CELL_RECORD
+    <set >
+      <if test="wahoCellRecordStart != null" >
+        WAHO_CELL_RECORD_START = #{wahoCellRecordStart,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="wahoCellRecordEnd != null" >
+        WAHO_CELL_RECORD_END = #{wahoCellRecordEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="wahoceId != null" >
+        WAHOCE_ID = #{wahoceId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WAHO_CELL_RECORD_ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.whc.aip.storage.model.warehouse.WahoCellRecord" >
+    update WHC_WAHO_CELL_RECORD
+    set WAHO_CELL_RECORD_START = #{wahoCellRecordStart,jdbcType=VARCHAR},
+      ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      WAHO_CELL_RECORD_END = #{wahoCellRecordEnd,jdbcType=VARCHAR},
+      WAHOCE_ID = #{wahoceId,jdbcType=VARCHAR}
+    where WAHO_CELL_RECORD_ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

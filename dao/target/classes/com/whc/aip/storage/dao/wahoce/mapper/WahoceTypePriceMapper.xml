@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whc.aip.storage.dao.wahoce.WahoceTypePriceMapper" >
+  <resultMap id="BaseResultMap" type="com.whc.aip.storage.model.wahoce.WahoceTypePrice" >
+    <id column="WATYPR_ID" property="id" jdbcType="VARCHAR" />
+    <result column="WAHO_ID" property="wahoId" jdbcType="VARCHAR" />
+    <result column="WATY_ID" property="watyId" jdbcType="VARCHAR" />
+    <result column="WATYPR_MONTH_PRICE" property="monthPrice" jdbcType="VARCHAR" />
+    <result column="WATYPR_DAY_PRICE" property="dayPrice" jdbcType="VARCHAR" />
+    <result column="WATYPR_HALF_PRICE" property="halfPrice" jdbcType="VARCHAR" />
+    <result column="WATYPR_YEAR_PRICE" property="yearPrice" jdbcType="VARCHAR" />
+    <result column="WATYPR_SPECIAL_PRICE" property="specialPrice" jdbcType="VARCHAR" />
+    <result column="WATYPR_TIME_PRICE" property="timePrice" jdbcType="VARCHAR" />
+    <result column="WATYPR_DEPOSIT_PRICE" property="depositPrice" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    WATYPR_ID, WAHO_ID, WATY_ID, WATYPR_MONTH_PRICE, WATYPR_DAY_PRICE, WATYPR_HALF_PRICE, 
+    WATYPR_YEAR_PRICE, WATYPR_SPECIAL_PRICE, WATYPR_TIME_PRICE, WATYPR_DEPOSIT_PRICE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.whc.aip.storage.model.wahoce.WahoceTypePriceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from WHC_WAHOCE_TYPE_PRICE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from WHC_WAHOCE_TYPE_PRICE
+    where WATYPR_ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from WHC_WAHOCE_TYPE_PRICE
+    where WATYPR_ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.whc.aip.storage.model.wahoce.WahoceTypePriceExample" >
+    delete from WHC_WAHOCE_TYPE_PRICE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.whc.aip.storage.model.wahoce.WahoceTypePrice" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      select sys_guid() from dual
+    </selectKey>
+    insert into WHC_WAHOCE_TYPE_PRICE (WATYPR_ID, WAHO_ID, WATY_ID, 
+      WATYPR_MONTH_PRICE, WATYPR_DAY_PRICE, WATYPR_HALF_PRICE, 
+      WATYPR_YEAR_PRICE, WATYPR_SPECIAL_PRICE, WATYPR_TIME_PRICE, 
+      WATYPR_DEPOSIT_PRICE)
+    values (#{id,jdbcType=VARCHAR}, #{wahoId,jdbcType=VARCHAR}, #{watyId,jdbcType=VARCHAR}, 
+      #{monthPrice,jdbcType=VARCHAR}, #{dayPrice,jdbcType=VARCHAR}, #{halfPrice,jdbcType=VARCHAR}, 
+      #{yearPrice,jdbcType=VARCHAR}, #{specialPrice,jdbcType=VARCHAR}, #{timePrice,jdbcType=VARCHAR}, 
+      #{depositPrice,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.whc.aip.storage.model.wahoce.WahoceTypePrice" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      select sys_guid() from dual
+    </selectKey>
+    insert into WHC_WAHOCE_TYPE_PRICE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      WATYPR_ID,
+      <if test="wahoId != null" >
+        WAHO_ID,
+      </if>
+      <if test="watyId != null" >
+        WATY_ID,
+      </if>
+      <if test="monthPrice != null" >
+        WATYPR_MONTH_PRICE,
+      </if>
+      <if test="dayPrice != null" >
+        WATYPR_DAY_PRICE,
+      </if>
+      <if test="halfPrice != null" >
+        WATYPR_HALF_PRICE,
+      </if>
+      <if test="yearPrice != null" >
+        WATYPR_YEAR_PRICE,
+      </if>
+      <if test="specialPrice != null" >
+        WATYPR_SPECIAL_PRICE,
+      </if>
+      <if test="timePrice != null" >
+        WATYPR_TIME_PRICE,
+      </if>
+      <if test="depositPrice != null" >
+        WATYPR_DEPOSIT_PRICE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=VARCHAR},
+      <if test="wahoId != null" >
+        #{wahoId,jdbcType=VARCHAR},
+      </if>
+      <if test="watyId != null" >
+        #{watyId,jdbcType=VARCHAR},
+      </if>
+      <if test="monthPrice != null" >
+        #{monthPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="dayPrice != null" >
+        #{dayPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="halfPrice != null" >
+        #{halfPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="yearPrice != null" >
+        #{yearPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="specialPrice != null" >
+        #{specialPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="timePrice != null" >
+        #{timePrice,jdbcType=VARCHAR},
+      </if>
+      <if test="depositPrice != null" >
+        #{depositPrice,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.whc.aip.storage.model.wahoce.WahoceTypePriceExample" resultType="java.lang.Integer" >
+    select count(*) from WHC_WAHOCE_TYPE_PRICE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update WHC_WAHOCE_TYPE_PRICE
+    <set >
+      <if test="record.id != null" >
+        WATYPR_ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wahoId != null" >
+        WAHO_ID = #{record.wahoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.watyId != null" >
+        WATY_ID = #{record.watyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monthPrice != null" >
+        WATYPR_MONTH_PRICE = #{record.monthPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dayPrice != null" >
+        WATYPR_DAY_PRICE = #{record.dayPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.halfPrice != null" >
+        WATYPR_HALF_PRICE = #{record.halfPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yearPrice != null" >
+        WATYPR_YEAR_PRICE = #{record.yearPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specialPrice != null" >
+        WATYPR_SPECIAL_PRICE = #{record.specialPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timePrice != null" >
+        WATYPR_TIME_PRICE = #{record.timePrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.depositPrice != null" >
+        WATYPR_DEPOSIT_PRICE = #{record.depositPrice,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update WHC_WAHOCE_TYPE_PRICE
+    set WATYPR_ID = #{record.id,jdbcType=VARCHAR},
+      WAHO_ID = #{record.wahoId,jdbcType=VARCHAR},
+      WATY_ID = #{record.watyId,jdbcType=VARCHAR},
+      WATYPR_MONTH_PRICE = #{record.monthPrice,jdbcType=VARCHAR},
+      WATYPR_DAY_PRICE = #{record.dayPrice,jdbcType=VARCHAR},
+      WATYPR_HALF_PRICE = #{record.halfPrice,jdbcType=VARCHAR},
+      WATYPR_YEAR_PRICE = #{record.yearPrice,jdbcType=VARCHAR},
+      WATYPR_SPECIAL_PRICE = #{record.specialPrice,jdbcType=VARCHAR},
+      WATYPR_TIME_PRICE = #{record.timePrice,jdbcType=VARCHAR},
+      WATYPR_DEPOSIT_PRICE = #{record.depositPrice,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.whc.aip.storage.model.wahoce.WahoceTypePrice" >
+    update WHC_WAHOCE_TYPE_PRICE
+    <set >
+      <if test="wahoId != null" >
+        WAHO_ID = #{wahoId,jdbcType=VARCHAR},
+      </if>
+      <if test="watyId != null" >
+        WATY_ID = #{watyId,jdbcType=VARCHAR},
+      </if>
+      <if test="monthPrice != null" >
+        WATYPR_MONTH_PRICE = #{monthPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="dayPrice != null" >
+        WATYPR_DAY_PRICE = #{dayPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="halfPrice != null" >
+        WATYPR_HALF_PRICE = #{halfPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="yearPrice != null" >
+        WATYPR_YEAR_PRICE = #{yearPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="specialPrice != null" >
+        WATYPR_SPECIAL_PRICE = #{specialPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="timePrice != null" >
+        WATYPR_TIME_PRICE = #{timePrice,jdbcType=VARCHAR},
+      </if>
+      <if test="depositPrice != null" >
+        WATYPR_DEPOSIT_PRICE = #{depositPrice,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WATYPR_ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.whc.aip.storage.model.wahoce.WahoceTypePrice" >
+    update WHC_WAHOCE_TYPE_PRICE
+    set WAHO_ID = #{wahoId,jdbcType=VARCHAR},
+      WATY_ID = #{watyId,jdbcType=VARCHAR},
+      WATYPR_MONTH_PRICE = #{monthPrice,jdbcType=VARCHAR},
+      WATYPR_DAY_PRICE = #{dayPrice,jdbcType=VARCHAR},
+      WATYPR_HALF_PRICE = #{halfPrice,jdbcType=VARCHAR},
+      WATYPR_YEAR_PRICE = #{yearPrice,jdbcType=VARCHAR},
+      WATYPR_SPECIAL_PRICE = #{specialPrice,jdbcType=VARCHAR},
+      WATYPR_TIME_PRICE = #{timePrice,jdbcType=VARCHAR},
+      WATYPR_DEPOSIT_PRICE = #{depositPrice,jdbcType=VARCHAR}
+    where WATYPR_ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="getWahoceTypePriceMap" type="com.whc.aip.storage.model.wahoce.WahoceTypePrice">
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="wahoId" property="wahoId" jdbcType="VARCHAR" />
+    <result column="watyId" property="watyId" jdbcType="VARCHAR" />
+    <result column="monthPrice" property="monthPrice" jdbcType="VARCHAR" />
+    <result column="dayPrice" property="dayPrice" jdbcType="VARCHAR" />
+    <result column="halfPrice" property="halfPrice" jdbcType="VARCHAR" />
+    <result column="yearPrice" property="yearPrice" jdbcType="VARCHAR" />
+    <result column="specialPrice" property="specialPrice" jdbcType="VARCHAR" />
+    <result column="timePrice" property="timePrice" jdbcType="VARCHAR" />
+    <result column="depositPrice" property="depositPrice" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="getWahoceTypePrice" resultMap="getWahoceTypePriceMap">
+    select wtp.watypr_id        as "id",
+       wtp.waho_id              as "wahoId",
+       wtp.waty_id              as "watyId",
+       wtp.watypr_month_price   as "monthPrice",
+       wtp.watypr_day_price     as "dayPrice",
+       wtp.watypr_half_price    as "halfPrice",
+       wtp.watypr_year_price    as "yearPrice",
+       wtp.watypr_special_price as "specialPrice",
+       wtp.watypr_time_price    as "timePrice",
+       wtp.watypr_deposit_price as "depositPrice"
+  from whc_wahoce_type_price wtp
+ where wtp.waho_id = #{wahoId} and wtp.waty_id = #{watyId}
+  </select>
+</mapper>

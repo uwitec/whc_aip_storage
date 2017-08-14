@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://code.alibabatech.com/schema/dubbo
+    http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+    <!--property文件属性解密-->
+    <bean id="propertyConfigurer" class="com.wanhuchina.common.util.zk.ZookeeperPropertySupport">
+        <property name="locations">
+            <list>
+                <value>classpath:zk.properties</value>
+            </list>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+    </bean>
+    <dubbo:application name="dubbo-whc-aip-storage-consumer"/>
+    <dubbo:registry protocol="zookeeper" address="${zk.address}" check="false" />
+    <!-- 消费服务 -->
+    <dubbo:reference id="DispensertWahoceListService" interface="com.whc.aip.storage.service.dispenser.DispensertWahoceListService"/>
+    <dubbo:reference id="DispensertWarehouseService" interface="com.whc.aip.storage.service.dispenser.DispensertWarehouseService"/>
+    <dubbo:reference id="DispensertWahoceCabinetService" interface="com.whc.aip.storage.service.dispenser.DispensertWahoceCabinetService"/>
+    <dubbo:reference id="DispensertPayService" interface="com.whc.aip.storage.service.dispenser.DispensertPayService"/>
+    <dubbo:reference id="DispensertWarehouseCellService" interface="com.whc.aip.storage.service.dispenser.DispensertWarehouseCellService"/>
+    <dubbo:reference id="DispensertCabinetService" interface="com.whc.aip.storage.service.dispenser.DispensertCabinetService"/>
+    <dubbo:reference id="DispensertWahoceService" interface="com.whc.aip.storage.service.dispenser.DispensertWahoceService"/>
+    <dubbo:reference id="doorGuardService" interface="com.whc.aip.storage.service.common.DoorGuardService"/>
+    <dubbo:reference id="weigateDoorService" interface="com.whc.aip.storage.service.storage.WeigateDoorService"/>
+</beans>

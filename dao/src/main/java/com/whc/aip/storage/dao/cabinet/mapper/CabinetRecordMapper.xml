@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whc.aip.storage.dao.cabinet.CabinetRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.whc.aip.storage.model.cabinet.CabinetRecord" >
+    <id column="CARE_ID" property="id" jdbcType="VARCHAR" />
+    <result column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+    <result column="CABINET_ID" property="cabinetId" jdbcType="VARCHAR" />
+    <result column="CARE_CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="WAHOCE_ID" property="wahoceId" jdbcType="VARCHAR" />
+    <result column="CARE_QUERY_TIME" property="queryTime" jdbcType="VARCHAR" />
+    <result column="CARE_CABINET_STATUS" property="cabinetStatus" jdbcType="VARCHAR" />
+    <result column="CARE_OPERATOR" property="operator" jdbcType="VARCHAR" />
+    <result column="CARE_RETURN_TIME" property="returnTime" jdbcType="VARCHAR" />
+    <result column="CARE_RETURN_STATUS" property="returnStatus" jdbcType="VARCHAR" />
+    <result column="CARE_OPEN_TIME" property="openTime" jdbcType="VARCHAR" />
+    <result column="CARE_CLOS_TIME" property="closTime" jdbcType="VARCHAR" />
+    <result column="CARE_STATE_LOCK" property="stateLock" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CARE_ID, ORDER_ID, CABINET_ID, CARE_CREATE_TIME, WAHOCE_ID, CARE_QUERY_TIME, CARE_CABINET_STATUS, 
+    CARE_OPERATOR, CARE_RETURN_TIME, CARE_RETURN_STATUS, CARE_OPEN_TIME, CARE_CLOS_TIME, 
+    CARE_STATE_LOCK
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.whc.aip.storage.model.cabinet.CabinetRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from WEIGATE_CABINET_RECORD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from WEIGATE_CABINET_RECORD
+    where CARE_ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from WEIGATE_CABINET_RECORD
+    where CARE_ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.whc.aip.storage.model.cabinet.CabinetRecordExample" >
+    delete from WEIGATE_CABINET_RECORD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.whc.aip.storage.model.cabinet.CabinetRecord" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      select sys_guid() from dual
+    </selectKey>
+    insert into WEIGATE_CABINET_RECORD (CARE_ID, ORDER_ID, CABINET_ID, 
+      CARE_CREATE_TIME, WAHOCE_ID, CARE_QUERY_TIME, 
+      CARE_CABINET_STATUS, CARE_OPERATOR, CARE_RETURN_TIME, 
+      CARE_RETURN_STATUS, CARE_OPEN_TIME, CARE_CLOS_TIME, 
+      CARE_STATE_LOCK)
+    values (#{id,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, #{cabinetId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{wahoceId,jdbcType=VARCHAR}, #{queryTime,jdbcType=VARCHAR}, 
+      #{cabinetStatus,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, #{returnTime,jdbcType=VARCHAR}, 
+      #{returnStatus,jdbcType=VARCHAR}, #{openTime,jdbcType=VARCHAR}, #{closTime,jdbcType=VARCHAR}, 
+      #{stateLock,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.whc.aip.storage.model.cabinet.CabinetRecord" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      select sys_guid() from dual
+    </selectKey>
+    insert into WEIGATE_CABINET_RECORD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      CARE_ID,
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="cabinetId != null" >
+        CABINET_ID,
+      </if>
+      <if test="createTime != null" >
+        CARE_CREATE_TIME,
+      </if>
+      <if test="wahoceId != null" >
+        WAHOCE_ID,
+      </if>
+      <if test="queryTime != null" >
+        CARE_QUERY_TIME,
+      </if>
+      <if test="cabinetStatus != null" >
+        CARE_CABINET_STATUS,
+      </if>
+      <if test="operator != null" >
+        CARE_OPERATOR,
+      </if>
+      <if test="returnTime != null" >
+        CARE_RETURN_TIME,
+      </if>
+      <if test="returnStatus != null" >
+        CARE_RETURN_STATUS,
+      </if>
+      <if test="openTime != null" >
+        CARE_OPEN_TIME,
+      </if>
+      <if test="closTime != null" >
+        CARE_CLOS_TIME,
+      </if>
+      <if test="stateLock != null" >
+        CARE_STATE_LOCK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=VARCHAR},
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="cabinetId != null" >
+        #{cabinetId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="wahoceId != null" >
+        #{wahoceId,jdbcType=VARCHAR},
+      </if>
+      <if test="queryTime != null" >
+        #{queryTime,jdbcType=VARCHAR},
+      </if>
+      <if test="cabinetStatus != null" >
+        #{cabinetStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="returnTime != null" >
+        #{returnTime,jdbcType=VARCHAR},
+      </if>
+      <if test="returnStatus != null" >
+        #{returnStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="openTime != null" >
+        #{openTime,jdbcType=VARCHAR},
+      </if>
+      <if test="closTime != null" >
+        #{closTime,jdbcType=VARCHAR},
+      </if>
+      <if test="stateLock != null" >
+        #{stateLock,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.whc.aip.storage.model.cabinet.CabinetRecordExample" resultType="java.lang.Integer" >
+    select count(*) from WEIGATE_CABINET_RECORD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update WEIGATE_CABINET_RECORD
+    <set >
+      <if test="record.id != null" >
+        CARE_ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderId != null" >
+        ORDER_ID = #{record.orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cabinetId != null" >
+        CABINET_ID = #{record.cabinetId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CARE_CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wahoceId != null" >
+        WAHOCE_ID = #{record.wahoceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.queryTime != null" >
+        CARE_QUERY_TIME = #{record.queryTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cabinetStatus != null" >
+        CARE_CABINET_STATUS = #{record.cabinetStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null" >
+        CARE_OPERATOR = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnTime != null" >
+        CARE_RETURN_TIME = #{record.returnTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnStatus != null" >
+        CARE_RETURN_STATUS = #{record.returnStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openTime != null" >
+        CARE_OPEN_TIME = #{record.openTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.closTime != null" >
+        CARE_CLOS_TIME = #{record.closTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stateLock != null" >
+        CARE_STATE_LOCK = #{record.stateLock,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update WEIGATE_CABINET_RECORD
+    set CARE_ID = #{record.id,jdbcType=VARCHAR},
+      ORDER_ID = #{record.orderId,jdbcType=VARCHAR},
+      CABINET_ID = #{record.cabinetId,jdbcType=VARCHAR},
+      CARE_CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      WAHOCE_ID = #{record.wahoceId,jdbcType=VARCHAR},
+      CARE_QUERY_TIME = #{record.queryTime,jdbcType=VARCHAR},
+      CARE_CABINET_STATUS = #{record.cabinetStatus,jdbcType=VARCHAR},
+      CARE_OPERATOR = #{record.operator,jdbcType=VARCHAR},
+      CARE_RETURN_TIME = #{record.returnTime,jdbcType=VARCHAR},
+      CARE_RETURN_STATUS = #{record.returnStatus,jdbcType=VARCHAR},
+      CARE_OPEN_TIME = #{record.openTime,jdbcType=VARCHAR},
+      CARE_CLOS_TIME = #{record.closTime,jdbcType=VARCHAR},
+      CARE_STATE_LOCK = #{record.stateLock,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.whc.aip.storage.model.cabinet.CabinetRecord" >
+    update WEIGATE_CABINET_RECORD
+    <set >
+      <if test="orderId != null" >
+        ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="cabinetId != null" >
+        CABINET_ID = #{cabinetId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CARE_CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="wahoceId != null" >
+        WAHOCE_ID = #{wahoceId,jdbcType=VARCHAR},
+      </if>
+      <if test="queryTime != null" >
+        CARE_QUERY_TIME = #{queryTime,jdbcType=VARCHAR},
+      </if>
+      <if test="cabinetStatus != null" >
+        CARE_CABINET_STATUS = #{cabinetStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        CARE_OPERATOR = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="returnTime != null" >
+        CARE_RETURN_TIME = #{returnTime,jdbcType=VARCHAR},
+      </if>
+      <if test="returnStatus != null" >
+        CARE_RETURN_STATUS = #{returnStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="openTime != null" >
+        CARE_OPEN_TIME = #{openTime,jdbcType=VARCHAR},
+      </if>
+      <if test="closTime != null" >
+        CARE_CLOS_TIME = #{closTime,jdbcType=VARCHAR},
+      </if>
+      <if test="stateLock != null" >
+        CARE_STATE_LOCK = #{stateLock,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CARE_ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.whc.aip.storage.model.cabinet.CabinetRecord" >
+    update WEIGATE_CABINET_RECORD
+    set ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      CABINET_ID = #{cabinetId,jdbcType=VARCHAR},
+      CARE_CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      WAHOCE_ID = #{wahoceId,jdbcType=VARCHAR},
+      CARE_QUERY_TIME = #{queryTime,jdbcType=VARCHAR},
+      CARE_CABINET_STATUS = #{cabinetStatus,jdbcType=VARCHAR},
+      CARE_OPERATOR = #{operator,jdbcType=VARCHAR},
+      CARE_RETURN_TIME = #{returnTime,jdbcType=VARCHAR},
+      CARE_RETURN_STATUS = #{returnStatus,jdbcType=VARCHAR},
+      CARE_OPEN_TIME = #{openTime,jdbcType=VARCHAR},
+      CARE_CLOS_TIME = #{closTime,jdbcType=VARCHAR},
+      CARE_STATE_LOCK = #{stateLock,jdbcType=VARCHAR}
+    where CARE_ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="getCabinetRecordNumberLockMap" type="com.whc.aip.storage.model.cabinet.CabinetRecordNumberLock">
+    <result column="numberLock" property="numberLock" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="getCabinetRecordNumberLock" resultMap="getCabinetRecordNumberLockMap">
+    select to_char(count(*)) as "numberLock" from weigate_cabinet_record r
+   	where r.order_id=#{orderId}
+  </select>
+  <resultMap id="getWeigateCabinetRecordListMap" type="com.whc.aip.storage.model.cabinet.CabinetRecord">
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="createTime" property="createTime" jdbcType="VARCHAR" />
+    <result column="queryTime" property="queryTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="getWeigateCabinetRecordList" resultMap="getWeigateCabinetRecordListMap">
+    select r.care_id as "id",r.care_create_time as "createTime",
+          r.care_query_time as "queryTime"
+    from weigate_cabinet_record  r where r.order_id=#{orderId}
+  </select>
+</mapper>

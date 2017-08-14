@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whc.aip.storage.dao.warehouse.WahoceTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.whc.aip.storage.model.warehouse.WahoceType" >
+    <id column="WATY_ID" property="id" jdbcType="VARCHAR" />
+    <result column="WATY_CODE" property="code" jdbcType="VARCHAR" />
+    <result column="WATY_NAME" property="name" jdbcType="VARCHAR" />
+    <result column="WATY_DESC" property="desc" jdbcType="VARCHAR" />
+    <result column="WATY_STATUS" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WATY_ID, WATY_CODE, WATY_NAME, WATY_DESC, WATY_STATUS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from WHC_WAHOCE_TYPE
+    where WATY_ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.whc.aip.storage.model.warehouse.WahoceType" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      select sys_guid() from dual
+    </selectKey>
+    insert into WHC_WAHOCE_TYPE (WATY_ID, WATY_CODE, WATY_NAME, 
+      WATY_DESC, WATY_STATUS)
+    values (#{id,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{desc,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.whc.aip.storage.model.warehouse.WahoceType" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      select sys_guid() from dual
+    </selectKey>
+    insert into WHC_WAHOCE_TYPE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      WATY_ID,
+      <if test="code != null" >
+        WATY_CODE,
+      </if>
+      <if test="name != null" >
+        WATY_NAME,
+      </if>
+      <if test="desc != null" >
+        WATY_DESC,
+      </if>
+      <if test="status != null" >
+        WATY_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=VARCHAR},
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null" >
+        #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.whc.aip.storage.model.warehouse.WahoceType" >
+    update WHC_WAHOCE_TYPE
+    <set >
+      <if test="code != null" >
+        WATY_CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        WATY_NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null" >
+        WATY_DESC = #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        WATY_STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WATY_ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.whc.aip.storage.model.warehouse.WahoceType" >
+    update WHC_WAHOCE_TYPE
+    set WATY_CODE = #{code,jdbcType=VARCHAR},
+      WATY_NAME = #{name,jdbcType=VARCHAR},
+      WATY_DESC = #{desc,jdbcType=VARCHAR},
+      WATY_STATUS = #{status,jdbcType=VARCHAR}
+    where WATY_ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <resultMap id="wahocePriceParamMap" type="com.whc.aip.storage.model.wahoce.WahocePriceParam" >
+    <result column="typeCode" property="typeCode" jdbcType="VARCHAR" />
+    <result column="typeName" property="typeName" jdbcType="VARCHAR" />
+    <result column="size" property="size" jdbcType="VARCHAR" />
+    <result column="count" property="count" jdbcType="VARCHAR" />
+    <result column="dayPrice" property="dayPrice" jdbcType="VARCHAR" />
+    <result column="monthPrice" property="monthPrice" jdbcType="VARCHAR" />
+    <result column="halfPrice" property="halfPrice" jdbcType="VARCHAR" />
+    <result column="yearPrice" property="yearPrice" jdbcType="VARCHAR" />
+    <result column="specialPrice" property="specialPrice" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="selWahocePriceParam" resultMap="wahocePriceParamMap">
+    select t2.waty_code as "typeCode",
+			       t2.waty_name as "typeName",
+			       t1."size" as "size",
+			       t1."count"||'' as "count",
+			       nvl(t3.watypr_day_price, 0) as "dayPrice",
+			       nvl(t3.watypr_month_price, 0) as "monthPrice",
+			       nvl(t3.watypr_half_price, 0) as "halfPrice",
+			       nvl(t3.watypr_year_price, 0) as "yearPrice",
+			       nvl(t3.watypr_special_price, 0) as "specialPrice"
+			from whc_wahoce_type_price t3
+			left join
+			    (
+			    select c.wahoce_size as "size", c.wahoce_type as "typeId", count(*) as "count"
+			    from whc_warehouse_cell c
+			    left join whc_warehouse w on c.waho_id = w.waho_id
+			    where  #{warehouseId} = c.waho_id and wahoce_status in ( '0') group by c.wahoce_type, c.wahoce_size
+			    )  t1 on t3.waty_id = t1."typeId"
+			left join whc_wahoce_type t2 on t3.waty_id = t2.waty_id
+			where t2.waty_status = '1' and #{warehouseId} = t3.waho_id
+			order by t1."size"
+
+  </select>
+
+  <select id="selWahoceTypeByStatus" resultMap="BaseResultMap">
+    select * from whc_wahoce_type wwt where wwt.waty_status=#{status}
+  </select>
+</mapper>

@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whc.aip.storage.dao.cabinet.CabinetMapper" >
+  <resultMap id="BaseResultMap" type="com.whc.aip.storage.model.cabinet.Cabinet" >
+    <result column="CABINET_ID" property="id" jdbcType="VARCHAR" />
+    <result column="CABINET_NO" property="no" jdbcType="VARCHAR" />
+    <result column="CABINET_STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="CABINET_ISDEL" property="isDel" jdbcType="VARCHAR" />
+    <result column="CABINET_PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="CABINET_DOOR_NO" property="doorNo" jdbcType="VARCHAR" />
+    <result column="WAHO_ID" property="wahoId" jdbcType="VARCHAR" />
+    <result column="CABINET_SUPPER_PASSWORD" property="supperPassword" jdbcType="VARCHAR" />
+    <result column="CABI_ID" property="cabiId" jdbcType="VARCHAR" />
+    <result column="WAHOCE_ID" property="wahoceId" jdbcType="VARCHAR" />
+    <result column="CABINET_OPEN_TIME" property="openTime" jdbcType="VARCHAR" />
+    <result column="CABINET_CLOS_TIME" property="closTime" jdbcType="VARCHAR" />
+    <result column="CABINET_STATE_LOCK" property="stateLock" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CABINET_ID, CABINET_NO, CABINET_STATUS, CABINET_ISDEL, CABINET_PASSWORD, CABINET_DOOR_NO, 
+    WAHO_ID, CABINET_SUPPER_PASSWORD, CABI_ID, WAHOCE_ID, CABINET_OPEN_TIME, CABINET_CLOS_TIME, 
+    CABINET_STATE_LOCK
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.whc.aip.storage.model.cabinet.CabinetExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from WEIGATE_CABINET
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.whc.aip.storage.model.cabinet.CabinetExample" >
+    delete from WEIGATE_CABINET
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.whc.aip.storage.model.cabinet.Cabinet" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      select sys_guid() from dual
+    </selectKey>
+    insert into WEIGATE_CABINET (CABINET_ID, CABINET_NO, CABINET_STATUS, 
+      CABINET_ISDEL, CABINET_PASSWORD, CABINET_DOOR_NO, 
+      WAHO_ID, CABINET_SUPPER_PASSWORD, CABI_ID, 
+      WAHOCE_ID, CABINET_OPEN_TIME, CABINET_CLOS_TIME, 
+      CABINET_STATE_LOCK)
+    values (#{id,jdbcType=VARCHAR}, #{no,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{isDel,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{doorNo,jdbcType=VARCHAR}, 
+      #{wahoId,jdbcType=VARCHAR}, #{supperPassword,jdbcType=VARCHAR}, #{cabiId,jdbcType=VARCHAR}, 
+      #{wahoceId,jdbcType=VARCHAR}, #{openTime,jdbcType=VARCHAR}, #{closTime,jdbcType=VARCHAR}, 
+      #{stateLock,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.whc.aip.storage.model.cabinet.Cabinet" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      select sys_guid() from dual
+    </selectKey>
+    insert into WEIGATE_CABINET
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      CABINET_ID,
+      <if test="no != null" >
+        CABINET_NO,
+      </if>
+      <if test="status != null" >
+        CABINET_STATUS,
+      </if>
+      <if test="isDel != null" >
+        CABINET_ISDEL,
+      </if>
+      <if test="password != null" >
+        CABINET_PASSWORD,
+      </if>
+      <if test="doorNo != null" >
+        CABINET_DOOR_NO,
+      </if>
+      <if test="wahoId != null" >
+        WAHO_ID,
+      </if>
+      <if test="supperPassword != null" >
+        CABINET_SUPPER_PASSWORD,
+      </if>
+      <if test="cabiId != null" >
+        CABI_ID,
+      </if>
+      <if test="wahoceId != null" >
+        WAHOCE_ID,
+      </if>
+      <if test="openTime != null" >
+        CABINET_OPEN_TIME,
+      </if>
+      <if test="closTime != null" >
+        CABINET_CLOS_TIME,
+      </if>
+      <if test="stateLock != null" >
+        CABINET_STATE_LOCK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=VARCHAR},
+      <if test="no != null" >
+        #{no,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="doorNo != null" >
+        #{doorNo,jdbcType=VARCHAR},
+      </if>
+      <if test="wahoId != null" >
+        #{wahoId,jdbcType=VARCHAR},
+      </if>
+      <if test="supperPassword != null" >
+        #{supperPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="cabiId != null" >
+        #{cabiId,jdbcType=VARCHAR},
+      </if>
+      <if test="wahoceId != null" >
+        #{wahoceId,jdbcType=VARCHAR},
+      </if>
+      <if test="openTime != null" >
+        #{openTime,jdbcType=VARCHAR},
+      </if>
+      <if test="closTime != null" >
+        #{closTime,jdbcType=VARCHAR},
+      </if>
+      <if test="stateLock != null" >
+        #{stateLock,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.whc.aip.storage.model.cabinet.CabinetExample" resultType="java.lang.Integer" >
+    select count(*) from WEIGATE_CABINET
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update WEIGATE_CABINET
+    <set >
+      <if test="record.id != null" >
+        CABINET_ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.no != null" >
+        CABINET_NO = #{record.no,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        CABINET_STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDel != null" >
+        CABINET_ISDEL = #{record.isDel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        CABINET_PASSWORD = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doorNo != null" >
+        CABINET_DOOR_NO = #{record.doorNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wahoId != null" >
+        WAHO_ID = #{record.wahoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supperPassword != null" >
+        CABINET_SUPPER_PASSWORD = #{record.supperPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cabiId != null" >
+        CABI_ID = #{record.cabiId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wahoceId != null" >
+        WAHOCE_ID = #{record.wahoceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openTime != null" >
+        CABINET_OPEN_TIME = #{record.openTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.closTime != null" >
+        CABINET_CLOS_TIME = #{record.closTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stateLock != null" >
+        CABINET_STATE_LOCK = #{record.stateLock,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update WEIGATE_CABINET
+    set CABINET_ID = #{record.id,jdbcType=VARCHAR},
+      CABINET_NO = #{record.no,jdbcType=VARCHAR},
+      CABINET_STATUS = #{record.status,jdbcType=VARCHAR},
+      CABINET_ISDEL = #{record.isDel,jdbcType=VARCHAR},
+      CABINET_PASSWORD = #{record.password,jdbcType=VARCHAR},
+      CABINET_DOOR_NO = #{record.doorNo,jdbcType=VARCHAR},
+      WAHO_ID = #{record.wahoId,jdbcType=VARCHAR},
+      CABINET_SUPPER_PASSWORD = #{record.supperPassword,jdbcType=VARCHAR},
+      CABI_ID = #{record.cabiId,jdbcType=VARCHAR},
+      WAHOCE_ID = #{record.wahoceId,jdbcType=VARCHAR},
+      CABINET_OPEN_TIME = #{record.openTime,jdbcType=VARCHAR},
+      CABINET_CLOS_TIME = #{record.closTime,jdbcType=VARCHAR},
+      CABINET_STATE_LOCK = #{record.stateLock,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="getCabinetMap" type="com.whc.aip.storage.model.cabinet.Cabinet">
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="no" property="no" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="isDel" property="isDel" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="doorNo" property="doorNo" jdbcType="VARCHAR" />
+    <result column="wahoId" property="wahoId" jdbcType="VARCHAR" />
+    <result column="supperPassword" property="supperPassword" jdbcType="VARCHAR" />
+    <result column="cabiId" property="cabiId" jdbcType="VARCHAR" />
+    <result column="wahoceId" property="wahoceId" jdbcType="VARCHAR" />
+    <result column="openTime" property="openTime" jdbcType="VARCHAR" />
+    <result column="closTime" property="closTime" jdbcType="VARCHAR" />
+    <result column="stateLock" property="stateLock" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="getCabinet" resultMap="getCabinetMap">
+    select c.cabinet_id as "id",c.cabinet_no as "no",
+    c.cabinet_status as "status",c.cabinet_isdel as "isDel",
+    c.cabinet_password as "password",c.cabinet_door_no as "doorNo",
+    c.waho_id as "wahoId",c.cabinet_supper_password as "supperPassword",
+    c.cabi_id as "cabiId",c.wahoce_id as "wahoceId",c.cabinet_open_time as "openTime",
+    c.cabinet_clos_time as "closTime",c.cabinet_state_lock as "stateLock"
+    from weigate_cabinet c
+    where c.cabinet_id=#{id}
+  </select>
+</mapper>

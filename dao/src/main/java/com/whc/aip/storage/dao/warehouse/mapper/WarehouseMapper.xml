@@ -1,0 +1,1382 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whc.aip.storage.dao.warehouse.WarehouseMapper" >
+  <resultMap id="BaseResultMap" type="com.whc.aip.storage.model.warehouse.Warehouse" >
+    <id column="WAHO_ID" property="id" jdbcType="VARCHAR" />
+    <result column="WAHO_NAME" property="name" jdbcType="VARCHAR" />
+    <result column="WAHO_PROVINCE" property="province" jdbcType="VARCHAR" />
+    <result column="WAHO_CITY" property="city" jdbcType="VARCHAR" />
+    <result column="WAHO_ADDR" property="addr" jdbcType="VARCHAR" />
+    <result column="WAHO_STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="WAHO_TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="WAHO_AREA" property="area" jdbcType="VARCHAR" />
+    <result column="WAHO_IMAGE1" property="image1" jdbcType="VARCHAR" />
+    <result column="WAHO_IMAGE2" property="image2" jdbcType="VARCHAR" />
+    <result column="WAHO_IMAGE3" property="image3" jdbcType="VARCHAR" />
+    <result column="WAHO_INTRODUCE" property="introduce" jdbcType="VARCHAR" />
+    <result column="WAHO_PERS_ID" property="persId" jdbcType="VARCHAR" />
+    <result column="WAHO_PREFERENTIAL" property="preferential" jdbcType="VARCHAR" />
+    <result column="WAHO_LONG" property="longi" jdbcType="DECIMAL" />
+    <result column="WAHO_LATI" property="lati" jdbcType="DECIMAL" />
+    <result column="WAHO_BRIADDR" property="briaddr" jdbcType="VARCHAR" />
+    <result column="WAHO_DIS_LEVEL1" property="disLevel1" jdbcType="VARCHAR" />
+    <result column="WAHO_DIS_LEVEL2" property="disLevel2" jdbcType="VARCHAR" />
+    <result column="WAHO_DIS_LEVEL3" property="disLevel3" jdbcType="VARCHAR" />
+    <result column="WAHO_IMAGE4" property="image4" jdbcType="VARCHAR" />
+    <result column="WAHO_IMAGE5" property="image5" jdbcType="VARCHAR" />
+    <result column="WAHO_IMAGE6" property="image6" jdbcType="VARCHAR" />
+    <result column="WAHO_IMAGE7" property="image7" jdbcType="VARCHAR" />
+    <result column="WAHO_ADV1" property="adv1" jdbcType="VARCHAR" />
+    <result column="WAHO_ADV2" property="adv2" jdbcType="VARCHAR" />
+    <result column="WAHO_SMONTH_PRICE" property="smonthPrice" jdbcType="VARCHAR" />
+    <result column="WAHO_SDAY_PRICE" property="sdayPrice" jdbcType="VARCHAR" />
+    <result column="WAHO_MMONTH_PRICE" property="mmonthPrice" jdbcType="VARCHAR" />
+    <result column="WAHO_MDAY_PRICE" property="mdayPrice" jdbcType="VARCHAR" />
+    <result column="WAHO_BMONTH_PRICE" property="bmonthPrice" jdbcType="VARCHAR" />
+    <result column="WAHO_BDAY_PRICE" property="bdayPrice" jdbcType="VARCHAR" />
+    <result column="WAHO_CMONTH_PRICE" property="cmonthPrice" jdbcType="VARCHAR" />
+    <result column="WAHO_CDAY_PRICE" property="cdayPrice" jdbcType="VARCHAR" />
+    <result column="WAHO_RMONTH_PRICE" property="rmonthPrice" jdbcType="VARCHAR" />
+    <result column="WAHO_RDAY_PRICE" property="rdayPrice" jdbcType="VARCHAR" />
+    <result column="WAHO_LMONTH_PRICE" property="lmonthPrice" jdbcType="VARCHAR" />
+    <result column="WAHO_LDAY_PRICE" property="ldayPrice" jdbcType="VARCHAR" />
+    <result column="WAHO_INTELLIGENT_IMAGE" property="intelligentImage" jdbcType="VARCHAR" />
+    <result column="WAHO_IMMEDIATE_IMAGE" property="immediateImage" jdbcType="VARCHAR" />
+    <result column="WAHO_QRCODE_URL" property="qrcodeUrl" jdbcType="VARCHAR" />
+    <result column="WAHO_PRICE_INTRO" property="priceIntro" jdbcType="VARCHAR" />
+    <result column="WAHO_HOUR_START" property="hourStart" jdbcType="VARCHAR" />
+    <result column="WAHO_HOUR_RENEW" property="hourRenew" jdbcType="VARCHAR" />
+    <result column="WAHO_DAY_START" property="dayStart" jdbcType="VARCHAR" />
+    <result column="WAHO_DAY_RENEW" property="dayRenew" jdbcType="VARCHAR" />
+    <result column="WAHO_MONTH_START" property="monthStart" jdbcType="VARCHAR" />
+    <result column="WAHO_MONTH_RENEW" property="monthRenew" jdbcType="VARCHAR" />
+    <result column="WAHO_PROPERTY_TYPE" property="propertyType" jdbcType="VARCHAR" />
+    <result column="WAHO_IMAGEQRCODE" property="imageQrcode" jdbcType="VARCHAR" />
+    <result column="WAHO_ADV3" property="adv3" jdbcType="VARCHAR" />
+    <result column="WAHO_WECHATPUBLICNUMBER" property="wechatPublicNumber" jdbcType="VARCHAR" />
+    <result column="WAHO_ONLINE_DATE" property="onlineDate" jdbcType="VARCHAR" />
+    <result column="WAHO_CONTACTOR" property="contactor" jdbcType="VARCHAR" />
+    <result column="WAHO_OPENING_TIME" property="openingTime" jdbcType="VARCHAR" />
+    <result column="WAHO_PROJ_ID" property="projId" jdbcType="VARCHAR" />
+    <result column="WAHO_COLSING_TIME" property="colsingTime" jdbcType="VARCHAR" />
+    <result column="WAHO_CABINET_GROUP" property="cabinetGroup" jdbcType="VARCHAR" />
+    <result column="WAHO_CABINET_NUMBER" property="cabinetNumber" jdbcType="VARCHAR" />
+    <result column="WAHO_BUSINE_HOURS" property="busineHours" jdbcType="VARCHAR" />
+    <result column="WAHO_IS_CHECK" property="isCheck" jdbcType="VARCHAR" />
+    <result column="WAHO_QRCODE_URL_OLD" property="qrcodeUrlOld" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    WAHO_ID, WAHO_NAME, WAHO_PROVINCE, WAHO_CITY, WAHO_ADDR, WAHO_STATUS, WAHO_TYPE,
+    WAHO_AREA, WAHO_IMAGE1, WAHO_IMAGE2, WAHO_IMAGE3, WAHO_INTRODUCE, WAHO_PERS_ID, WAHO_PREFERENTIAL,
+    WAHO_LONG, WAHO_LATI, WAHO_BRIADDR, WAHO_DIS_LEVEL1, WAHO_DIS_LEVEL2, WAHO_DIS_LEVEL3,
+    WAHO_IMAGE4, WAHO_IMAGE5, WAHO_IMAGE6, WAHO_IMAGE7, WAHO_ADV1, WAHO_ADV2, WAHO_SMONTH_PRICE,
+    WAHO_SDAY_PRICE, WAHO_MMONTH_PRICE, WAHO_MDAY_PRICE, WAHO_BMONTH_PRICE, WAHO_BDAY_PRICE,
+    WAHO_CMONTH_PRICE, WAHO_CDAY_PRICE, WAHO_RMONTH_PRICE, WAHO_RDAY_PRICE, WAHO_LMONTH_PRICE,
+    WAHO_LDAY_PRICE, WAHO_INTELLIGENT_IMAGE, WAHO_IMMEDIATE_IMAGE, WAHO_QRCODE_URL, WAHO_PRICE_INTRO,
+    WAHO_HOUR_START, WAHO_HOUR_RENEW, WAHO_DAY_START, WAHO_DAY_RENEW, WAHO_MONTH_START,
+    WAHO_MONTH_RENEW, WAHO_PROPERTY_TYPE, WAHO_IMAGEQRCODE, WAHO_ADV3, WAHO_WECHATPUBLICNUMBER,
+    WAHO_ONLINE_DATE, WAHO_CONTACTOR, WAHO_OPENING_TIME, WAHO_PROJ_ID, WAHO_COLSING_TIME,
+    WAHO_CABINET_GROUP, WAHO_CABINET_NUMBER, WAHO_BUSINE_HOURS, WAHO_IS_CHECK, WAHO_QRCODE_URL_OLD
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.whc.aip.storage.model.warehouse.WarehouseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from WHC_WAREHOUSE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from WHC_WAREHOUSE
+    where WAHO_ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from WHC_WAREHOUSE
+    where WAHO_ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.whc.aip.storage.model.warehouse.WarehouseExample" >
+    delete from WHC_WAREHOUSE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.whc.aip.storage.model.warehouse.Warehouse" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      select sys_guid() from dual
+    </selectKey>
+    insert into WHC_WAREHOUSE (WAHO_ID, WAHO_NAME, WAHO_PROVINCE,
+    WAHO_CITY, WAHO_ADDR, WAHO_STATUS,
+    WAHO_TYPE, WAHO_AREA, WAHO_IMAGE1,
+    WAHO_IMAGE2, WAHO_IMAGE3, WAHO_INTRODUCE,
+    WAHO_PERS_ID, WAHO_PREFERENTIAL, WAHO_LONG,
+    WAHO_LATI, WAHO_BRIADDR, WAHO_DIS_LEVEL1,
+    WAHO_DIS_LEVEL2, WAHO_DIS_LEVEL3, WAHO_IMAGE4,
+    WAHO_IMAGE5, WAHO_IMAGE6, WAHO_IMAGE7,
+    WAHO_ADV1, WAHO_ADV2, WAHO_SMONTH_PRICE,
+    WAHO_SDAY_PRICE, WAHO_MMONTH_PRICE, WAHO_MDAY_PRICE,
+    WAHO_BMONTH_PRICE, WAHO_BDAY_PRICE, WAHO_CMONTH_PRICE,
+    WAHO_CDAY_PRICE, WAHO_RMONTH_PRICE, WAHO_RDAY_PRICE,
+    WAHO_LMONTH_PRICE, WAHO_LDAY_PRICE, WAHO_INTELLIGENT_IMAGE,
+    WAHO_IMMEDIATE_IMAGE, WAHO_QRCODE_URL, WAHO_PRICE_INTRO,
+    WAHO_HOUR_START, WAHO_HOUR_RENEW, WAHO_DAY_START,
+    WAHO_DAY_RENEW, WAHO_MONTH_START, WAHO_MONTH_RENEW,
+    WAHO_PROPERTY_TYPE, WAHO_IMAGEQRCODE, WAHO_ADV3,
+    WAHO_WECHATPUBLICNUMBER, WAHO_ONLINE_DATE, WAHO_CONTACTOR,
+    WAHO_OPENING_TIME, WAHO_PROJ_ID, WAHO_COLSING_TIME,
+    WAHO_CABINET_GROUP, WAHO_CABINET_NUMBER, WAHO_BUSINE_HOURS,
+    WAHO_IS_CHECK, WAHO_QRCODE_URL_OLD)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR},
+    #{city,jdbcType=VARCHAR}, #{addr,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
+    #{type,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{image1,jdbcType=VARCHAR},
+    #{image2,jdbcType=VARCHAR}, #{image3,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR},
+    #{persId,jdbcType=VARCHAR}, #{preferential,jdbcType=VARCHAR}, #{longi,jdbcType=DECIMAL},
+    #{lati,jdbcType=DECIMAL}, #{briaddr,jdbcType=VARCHAR}, #{disLevel1,jdbcType=VARCHAR},
+    #{disLevel2,jdbcType=VARCHAR}, #{disLevel3,jdbcType=VARCHAR}, #{image4,jdbcType=VARCHAR},
+    #{image5,jdbcType=VARCHAR}, #{image6,jdbcType=VARCHAR}, #{image7,jdbcType=VARCHAR},
+    #{adv1,jdbcType=VARCHAR}, #{adv2,jdbcType=VARCHAR}, #{smonthPrice,jdbcType=VARCHAR},
+    #{sdayPrice,jdbcType=VARCHAR}, #{mmonthPrice,jdbcType=VARCHAR}, #{mdayPrice,jdbcType=VARCHAR},
+    #{bmonthPrice,jdbcType=VARCHAR}, #{bdayPrice,jdbcType=VARCHAR}, #{cmonthPrice,jdbcType=VARCHAR},
+    #{cdayPrice,jdbcType=VARCHAR}, #{rmonthPrice,jdbcType=VARCHAR}, #{rdayPrice,jdbcType=VARCHAR},
+    #{lmonthPrice,jdbcType=VARCHAR}, #{ldayPrice,jdbcType=VARCHAR}, #{intelligentImage,jdbcType=VARCHAR},
+    #{immediateImage,jdbcType=VARCHAR}, #{qrcodeUrl,jdbcType=VARCHAR}, #{priceIntro,jdbcType=VARCHAR},
+    #{hourStart,jdbcType=VARCHAR}, #{hourRenew,jdbcType=VARCHAR}, #{dayStart,jdbcType=VARCHAR},
+    #{dayRenew,jdbcType=VARCHAR}, #{monthStart,jdbcType=VARCHAR}, #{monthRenew,jdbcType=VARCHAR},
+    #{propertyType,jdbcType=VARCHAR}, #{imageQrcode,jdbcType=VARCHAR}, #{adv3,jdbcType=VARCHAR},
+    #{wechatPublicNumber,jdbcType=VARCHAR}, #{onlineDate,jdbcType=VARCHAR}, #{contactor,jdbcType=VARCHAR},
+    #{openingTime,jdbcType=VARCHAR}, #{projId,jdbcType=VARCHAR}, #{colsingTime,jdbcType=VARCHAR},
+    #{cabinetGroup,jdbcType=VARCHAR}, #{cabinetNumber,jdbcType=VARCHAR}, #{busineHours,jdbcType=VARCHAR},
+    #{isCheck,jdbcType=VARCHAR}, #{qrcodeUrlOld,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.whc.aip.storage.model.warehouse.Warehouse" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      select sys_guid() from dual
+    </selectKey>
+    insert into WHC_WAREHOUSE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      WAHO_ID,
+      <if test="name != null" >
+        WAHO_NAME,
+      </if>
+      <if test="province != null" >
+        WAHO_PROVINCE,
+      </if>
+      <if test="city != null" >
+        WAHO_CITY,
+      </if>
+      <if test="addr != null" >
+        WAHO_ADDR,
+      </if>
+      <if test="status != null" >
+        WAHO_STATUS,
+      </if>
+      <if test="type != null" >
+        WAHO_TYPE,
+      </if>
+      <if test="area != null" >
+        WAHO_AREA,
+      </if>
+      <if test="image1 != null" >
+        WAHO_IMAGE1,
+      </if>
+      <if test="image2 != null" >
+        WAHO_IMAGE2,
+      </if>
+      <if test="image3 != null" >
+        WAHO_IMAGE3,
+      </if>
+      <if test="introduce != null" >
+        WAHO_INTRODUCE,
+      </if>
+      <if test="persId != null" >
+        WAHO_PERS_ID,
+      </if>
+      <if test="preferential != null" >
+        WAHO_PREFERENTIAL,
+      </if>
+      <if test="longi != null" >
+        WAHO_LONG,
+      </if>
+      <if test="lati != null" >
+        WAHO_LATI,
+      </if>
+      <if test="briaddr != null" >
+        WAHO_BRIADDR,
+      </if>
+      <if test="disLevel1 != null" >
+        WAHO_DIS_LEVEL1,
+      </if>
+      <if test="disLevel2 != null" >
+        WAHO_DIS_LEVEL2,
+      </if>
+      <if test="disLevel3 != null" >
+        WAHO_DIS_LEVEL3,
+      </if>
+      <if test="image4 != null" >
+        WAHO_IMAGE4,
+      </if>
+      <if test="image5 != null" >
+        WAHO_IMAGE5,
+      </if>
+      <if test="image6 != null" >
+        WAHO_IMAGE6,
+      </if>
+      <if test="image7 != null" >
+        WAHO_IMAGE7,
+      </if>
+      <if test="adv1 != null" >
+        WAHO_ADV1,
+      </if>
+      <if test="adv2 != null" >
+        WAHO_ADV2,
+      </if>
+      <if test="smonthPrice != null" >
+        WAHO_SMONTH_PRICE,
+      </if>
+      <if test="sdayPrice != null" >
+        WAHO_SDAY_PRICE,
+      </if>
+      <if test="mmonthPrice != null" >
+        WAHO_MMONTH_PRICE,
+      </if>
+      <if test="mdayPrice != null" >
+        WAHO_MDAY_PRICE,
+      </if>
+      <if test="bmonthPrice != null" >
+        WAHO_BMONTH_PRICE,
+      </if>
+      <if test="bdayPrice != null" >
+        WAHO_BDAY_PRICE,
+      </if>
+      <if test="cmonthPrice != null" >
+        WAHO_CMONTH_PRICE,
+      </if>
+      <if test="cdayPrice != null" >
+        WAHO_CDAY_PRICE,
+      </if>
+      <if test="rmonthPrice != null" >
+        WAHO_RMONTH_PRICE,
+      </if>
+      <if test="rdayPrice != null" >
+        WAHO_RDAY_PRICE,
+      </if>
+      <if test="lmonthPrice != null" >
+        WAHO_LMONTH_PRICE,
+      </if>
+      <if test="ldayPrice != null" >
+        WAHO_LDAY_PRICE,
+      </if>
+      <if test="intelligentImage != null" >
+        WAHO_INTELLIGENT_IMAGE,
+      </if>
+      <if test="immediateImage != null" >
+        WAHO_IMMEDIATE_IMAGE,
+      </if>
+      <if test="qrcodeUrl != null" >
+        WAHO_QRCODE_URL,
+      </if>
+      <if test="priceIntro != null" >
+        WAHO_PRICE_INTRO,
+      </if>
+      <if test="hourStart != null" >
+        WAHO_HOUR_START,
+      </if>
+      <if test="hourRenew != null" >
+        WAHO_HOUR_RENEW,
+      </if>
+      <if test="dayStart != null" >
+        WAHO_DAY_START,
+      </if>
+      <if test="dayRenew != null" >
+        WAHO_DAY_RENEW,
+      </if>
+      <if test="monthStart != null" >
+        WAHO_MONTH_START,
+      </if>
+      <if test="monthRenew != null" >
+        WAHO_MONTH_RENEW,
+      </if>
+      <if test="propertyType != null" >
+        WAHO_PROPERTY_TYPE,
+      </if>
+      <if test="imageQrcode != null" >
+        WAHO_IMAGEQRCODE,
+      </if>
+      <if test="adv3 != null" >
+        WAHO_ADV3,
+      </if>
+      <if test="wechatPublicNumber != null" >
+        WAHO_WECHATPUBLICNUMBER,
+      </if>
+      <if test="onlineDate != null" >
+        WAHO_ONLINE_DATE,
+      </if>
+      <if test="contactor != null" >
+        WAHO_CONTACTOR,
+      </if>
+      <if test="openingTime != null" >
+        WAHO_OPENING_TIME,
+      </if>
+      <if test="projId != null" >
+        WAHO_PROJ_ID,
+      </if>
+      <if test="colsingTime != null" >
+        WAHO_COLSING_TIME,
+      </if>
+      <if test="cabinetGroup != null" >
+        WAHO_CABINET_GROUP,
+      </if>
+      <if test="cabinetNumber != null" >
+        WAHO_CABINET_NUMBER,
+      </if>
+      <if test="busineHours != null" >
+        WAHO_BUSINE_HOURS,
+      </if>
+      <if test="isCheck != null" >
+        WAHO_IS_CHECK,
+      </if>
+      <if test="qrcodeUrlOld != null" >
+        WAHO_QRCODE_URL_OLD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=VARCHAR},
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null" >
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="image1 != null" >
+        #{image1,jdbcType=VARCHAR},
+      </if>
+      <if test="image2 != null" >
+        #{image2,jdbcType=VARCHAR},
+      </if>
+      <if test="image3 != null" >
+        #{image3,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="persId != null" >
+        #{persId,jdbcType=VARCHAR},
+      </if>
+      <if test="preferential != null" >
+        #{preferential,jdbcType=VARCHAR},
+      </if>
+      <if test="longi != null" >
+        #{longi,jdbcType=DECIMAL},
+      </if>
+      <if test="lati != null" >
+        #{lati,jdbcType=DECIMAL},
+      </if>
+      <if test="briaddr != null" >
+        #{briaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="disLevel1 != null" >
+        #{disLevel1,jdbcType=VARCHAR},
+      </if>
+      <if test="disLevel2 != null" >
+        #{disLevel2,jdbcType=VARCHAR},
+      </if>
+      <if test="disLevel3 != null" >
+        #{disLevel3,jdbcType=VARCHAR},
+      </if>
+      <if test="image4 != null" >
+        #{image4,jdbcType=VARCHAR},
+      </if>
+      <if test="image5 != null" >
+        #{image5,jdbcType=VARCHAR},
+      </if>
+      <if test="image6 != null" >
+        #{image6,jdbcType=VARCHAR},
+      </if>
+      <if test="image7 != null" >
+        #{image7,jdbcType=VARCHAR},
+      </if>
+      <if test="adv1 != null" >
+        #{adv1,jdbcType=VARCHAR},
+      </if>
+      <if test="adv2 != null" >
+        #{adv2,jdbcType=VARCHAR},
+      </if>
+      <if test="smonthPrice != null" >
+        #{smonthPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="sdayPrice != null" >
+        #{sdayPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="mmonthPrice != null" >
+        #{mmonthPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="mdayPrice != null" >
+        #{mdayPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="bmonthPrice != null" >
+        #{bmonthPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="bdayPrice != null" >
+        #{bdayPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="cmonthPrice != null" >
+        #{cmonthPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="cdayPrice != null" >
+        #{cdayPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="rmonthPrice != null" >
+        #{rmonthPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="rdayPrice != null" >
+        #{rdayPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="lmonthPrice != null" >
+        #{lmonthPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="ldayPrice != null" >
+        #{ldayPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="intelligentImage != null" >
+        #{intelligentImage,jdbcType=VARCHAR},
+      </if>
+      <if test="immediateImage != null" >
+        #{immediateImage,jdbcType=VARCHAR},
+      </if>
+      <if test="qrcodeUrl != null" >
+        #{qrcodeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="priceIntro != null" >
+        #{priceIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="hourStart != null" >
+        #{hourStart,jdbcType=VARCHAR},
+      </if>
+      <if test="hourRenew != null" >
+        #{hourRenew,jdbcType=VARCHAR},
+      </if>
+      <if test="dayStart != null" >
+        #{dayStart,jdbcType=VARCHAR},
+      </if>
+      <if test="dayRenew != null" >
+        #{dayRenew,jdbcType=VARCHAR},
+      </if>
+      <if test="monthStart != null" >
+        #{monthStart,jdbcType=VARCHAR},
+      </if>
+      <if test="monthRenew != null" >
+        #{monthRenew,jdbcType=VARCHAR},
+      </if>
+      <if test="propertyType != null" >
+        #{propertyType,jdbcType=VARCHAR},
+      </if>
+      <if test="imageQrcode != null" >
+        #{imageQrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="adv3 != null" >
+        #{adv3,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatPublicNumber != null" >
+        #{wechatPublicNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineDate != null" >
+        #{onlineDate,jdbcType=VARCHAR},
+      </if>
+      <if test="contactor != null" >
+        #{contactor,jdbcType=VARCHAR},
+      </if>
+      <if test="openingTime != null" >
+        #{openingTime,jdbcType=VARCHAR},
+      </if>
+      <if test="projId != null" >
+        #{projId,jdbcType=VARCHAR},
+      </if>
+      <if test="colsingTime != null" >
+        #{colsingTime,jdbcType=VARCHAR},
+      </if>
+      <if test="cabinetGroup != null" >
+        #{cabinetGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="cabinetNumber != null" >
+        #{cabinetNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="busineHours != null" >
+        #{busineHours,jdbcType=VARCHAR},
+      </if>
+      <if test="isCheck != null" >
+        #{isCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="qrcodeUrlOld != null" >
+        #{qrcodeUrlOld,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.whc.aip.storage.model.warehouse.WarehouseExample" resultType="java.lang.Integer" >
+    select count(*) from WHC_WAREHOUSE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update WHC_WAREHOUSE
+    <set >
+      <if test="record.id != null" >
+        WAHO_ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        WAHO_NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null" >
+        WAHO_PROVINCE = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null" >
+        WAHO_CITY = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addr != null" >
+        WAHO_ADDR = #{record.addr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        WAHO_STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        WAHO_TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null" >
+        WAHO_AREA = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image1 != null" >
+        WAHO_IMAGE1 = #{record.image1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image2 != null" >
+        WAHO_IMAGE2 = #{record.image2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image3 != null" >
+        WAHO_IMAGE3 = #{record.image3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.introduce != null" >
+        WAHO_INTRODUCE = #{record.introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.persId != null" >
+        WAHO_PERS_ID = #{record.persId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.preferential != null" >
+        WAHO_PREFERENTIAL = #{record.preferential,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longi != null" >
+        WAHO_LONG = #{record.longi,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lati != null" >
+        WAHO_LATI = #{record.lati,jdbcType=DECIMAL},
+      </if>
+      <if test="record.briaddr != null" >
+        WAHO_BRIADDR = #{record.briaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disLevel1 != null" >
+        WAHO_DIS_LEVEL1 = #{record.disLevel1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disLevel2 != null" >
+        WAHO_DIS_LEVEL2 = #{record.disLevel2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disLevel3 != null" >
+        WAHO_DIS_LEVEL3 = #{record.disLevel3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image4 != null" >
+        WAHO_IMAGE4 = #{record.image4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image5 != null" >
+        WAHO_IMAGE5 = #{record.image5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image6 != null" >
+        WAHO_IMAGE6 = #{record.image6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image7 != null" >
+        WAHO_IMAGE7 = #{record.image7,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adv1 != null" >
+        WAHO_ADV1 = #{record.adv1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adv2 != null" >
+        WAHO_ADV2 = #{record.adv2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smonthPrice != null" >
+        WAHO_SMONTH_PRICE = #{record.smonthPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sdayPrice != null" >
+        WAHO_SDAY_PRICE = #{record.sdayPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mmonthPrice != null" >
+        WAHO_MMONTH_PRICE = #{record.mmonthPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mdayPrice != null" >
+        WAHO_MDAY_PRICE = #{record.mdayPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bmonthPrice != null" >
+        WAHO_BMONTH_PRICE = #{record.bmonthPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bdayPrice != null" >
+        WAHO_BDAY_PRICE = #{record.bdayPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cmonthPrice != null" >
+        WAHO_CMONTH_PRICE = #{record.cmonthPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cdayPrice != null" >
+        WAHO_CDAY_PRICE = #{record.cdayPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rmonthPrice != null" >
+        WAHO_RMONTH_PRICE = #{record.rmonthPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rdayPrice != null" >
+        WAHO_RDAY_PRICE = #{record.rdayPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lmonthPrice != null" >
+        WAHO_LMONTH_PRICE = #{record.lmonthPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ldayPrice != null" >
+        WAHO_LDAY_PRICE = #{record.ldayPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.intelligentImage != null" >
+        WAHO_INTELLIGENT_IMAGE = #{record.intelligentImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.immediateImage != null" >
+        WAHO_IMMEDIATE_IMAGE = #{record.immediateImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qrcodeUrl != null" >
+        WAHO_QRCODE_URL = #{record.qrcodeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceIntro != null" >
+        WAHO_PRICE_INTRO = #{record.priceIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hourStart != null" >
+        WAHO_HOUR_START = #{record.hourStart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hourRenew != null" >
+        WAHO_HOUR_RENEW = #{record.hourRenew,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dayStart != null" >
+        WAHO_DAY_START = #{record.dayStart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dayRenew != null" >
+        WAHO_DAY_RENEW = #{record.dayRenew,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monthStart != null" >
+        WAHO_MONTH_START = #{record.monthStart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monthRenew != null" >
+        WAHO_MONTH_RENEW = #{record.monthRenew,jdbcType=VARCHAR},
+      </if>
+      <if test="record.propertyType != null" >
+        WAHO_PROPERTY_TYPE = #{record.propertyType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imageQrcode != null" >
+        WAHO_IMAGEQRCODE = #{record.imageQrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adv3 != null" >
+        WAHO_ADV3 = #{record.adv3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wechatPublicNumber != null" >
+        WAHO_WECHATPUBLICNUMBER = #{record.wechatPublicNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.onlineDate != null" >
+        WAHO_ONLINE_DATE = #{record.onlineDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactor != null" >
+        WAHO_CONTACTOR = #{record.contactor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openingTime != null" >
+        WAHO_OPENING_TIME = #{record.openingTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projId != null" >
+        WAHO_PROJ_ID = #{record.projId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.colsingTime != null" >
+        WAHO_COLSING_TIME = #{record.colsingTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cabinetGroup != null" >
+        WAHO_CABINET_GROUP = #{record.cabinetGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cabinetNumber != null" >
+        WAHO_CABINET_NUMBER = #{record.cabinetNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.busineHours != null" >
+        WAHO_BUSINE_HOURS = #{record.busineHours,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isCheck != null" >
+        WAHO_IS_CHECK = #{record.isCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qrcodeUrlOld != null" >
+        WAHO_QRCODE_URL_OLD = #{record.qrcodeUrlOld,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update WHC_WAREHOUSE
+    set WAHO_ID = #{record.id,jdbcType=VARCHAR},
+    WAHO_NAME = #{record.name,jdbcType=VARCHAR},
+    WAHO_PROVINCE = #{record.province,jdbcType=VARCHAR},
+    WAHO_CITY = #{record.city,jdbcType=VARCHAR},
+    WAHO_ADDR = #{record.addr,jdbcType=VARCHAR},
+    WAHO_STATUS = #{record.status,jdbcType=VARCHAR},
+    WAHO_TYPE = #{record.type,jdbcType=VARCHAR},
+    WAHO_AREA = #{record.area,jdbcType=VARCHAR},
+    WAHO_IMAGE1 = #{record.image1,jdbcType=VARCHAR},
+    WAHO_IMAGE2 = #{record.image2,jdbcType=VARCHAR},
+    WAHO_IMAGE3 = #{record.image3,jdbcType=VARCHAR},
+    WAHO_INTRODUCE = #{record.introduce,jdbcType=VARCHAR},
+    WAHO_PERS_ID = #{record.persId,jdbcType=VARCHAR},
+    WAHO_PREFERENTIAL = #{record.preferential,jdbcType=VARCHAR},
+    WAHO_LONG = #{record.longi,jdbcType=DECIMAL},
+    WAHO_LATI = #{record.lati,jdbcType=DECIMAL},
+    WAHO_BRIADDR = #{record.briaddr,jdbcType=VARCHAR},
+    WAHO_DIS_LEVEL1 = #{record.disLevel1,jdbcType=VARCHAR},
+    WAHO_DIS_LEVEL2 = #{record.disLevel2,jdbcType=VARCHAR},
+    WAHO_DIS_LEVEL3 = #{record.disLevel3,jdbcType=VARCHAR},
+    WAHO_IMAGE4 = #{record.image4,jdbcType=VARCHAR},
+    WAHO_IMAGE5 = #{record.image5,jdbcType=VARCHAR},
+    WAHO_IMAGE6 = #{record.image6,jdbcType=VARCHAR},
+    WAHO_IMAGE7 = #{record.image7,jdbcType=VARCHAR},
+    WAHO_ADV1 = #{record.adv1,jdbcType=VARCHAR},
+    WAHO_ADV2 = #{record.adv2,jdbcType=VARCHAR},
+    WAHO_SMONTH_PRICE = #{record.smonthPrice,jdbcType=VARCHAR},
+    WAHO_SDAY_PRICE = #{record.sdayPrice,jdbcType=VARCHAR},
+    WAHO_MMONTH_PRICE = #{record.mmonthPrice,jdbcType=VARCHAR},
+    WAHO_MDAY_PRICE = #{record.mdayPrice,jdbcType=VARCHAR},
+    WAHO_BMONTH_PRICE = #{record.bmonthPrice,jdbcType=VARCHAR},
+    WAHO_BDAY_PRICE = #{record.bdayPrice,jdbcType=VARCHAR},
+    WAHO_CMONTH_PRICE = #{record.cmonthPrice,jdbcType=VARCHAR},
+    WAHO_CDAY_PRICE = #{record.cdayPrice,jdbcType=VARCHAR},
+    WAHO_RMONTH_PRICE = #{record.rmonthPrice,jdbcType=VARCHAR},
+    WAHO_RDAY_PRICE = #{record.rdayPrice,jdbcType=VARCHAR},
+    WAHO_LMONTH_PRICE = #{record.lmonthPrice,jdbcType=VARCHAR},
+    WAHO_LDAY_PRICE = #{record.ldayPrice,jdbcType=VARCHAR},
+    WAHO_INTELLIGENT_IMAGE = #{record.intelligentImage,jdbcType=VARCHAR},
+    WAHO_IMMEDIATE_IMAGE = #{record.immediateImage,jdbcType=VARCHAR},
+    WAHO_QRCODE_URL = #{record.qrcodeUrl,jdbcType=VARCHAR},
+    WAHO_PRICE_INTRO = #{record.priceIntro,jdbcType=VARCHAR},
+    WAHO_HOUR_START = #{record.hourStart,jdbcType=VARCHAR},
+    WAHO_HOUR_RENEW = #{record.hourRenew,jdbcType=VARCHAR},
+    WAHO_DAY_START = #{record.dayStart,jdbcType=VARCHAR},
+    WAHO_DAY_RENEW = #{record.dayRenew,jdbcType=VARCHAR},
+    WAHO_MONTH_START = #{record.monthStart,jdbcType=VARCHAR},
+    WAHO_MONTH_RENEW = #{record.monthRenew,jdbcType=VARCHAR},
+    WAHO_PROPERTY_TYPE = #{record.propertyType,jdbcType=VARCHAR},
+    WAHO_IMAGEQRCODE = #{record.imageQrcode,jdbcType=VARCHAR},
+    WAHO_ADV3 = #{record.adv3,jdbcType=VARCHAR},
+    WAHO_WECHATPUBLICNUMBER = #{record.wechatPublicNumber,jdbcType=VARCHAR},
+    WAHO_ONLINE_DATE = #{record.onlineDate,jdbcType=VARCHAR},
+    WAHO_CONTACTOR = #{record.contactor,jdbcType=VARCHAR},
+    WAHO_OPENING_TIME = #{record.openingTime,jdbcType=VARCHAR},
+    WAHO_PROJ_ID = #{record.projId,jdbcType=VARCHAR},
+    WAHO_COLSING_TIME = #{record.colsingTime,jdbcType=VARCHAR},
+    WAHO_CABINET_GROUP = #{record.cabinetGroup,jdbcType=VARCHAR},
+    WAHO_CABINET_NUMBER = #{record.cabinetNumber,jdbcType=VARCHAR},
+    WAHO_BUSINE_HOURS = #{record.busineHours,jdbcType=VARCHAR},
+    WAHO_IS_CHECK = #{record.isCheck,jdbcType=VARCHAR},
+    WAHO_QRCODE_URL_OLD = #{record.qrcodeUrlOld,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.whc.aip.storage.model.warehouse.Warehouse" >
+    update WHC_WAREHOUSE
+    <set >
+      <if test="name != null" >
+        WAHO_NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        WAHO_PROVINCE = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        WAHO_CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null" >
+        WAHO_ADDR = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        WAHO_STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        WAHO_TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        WAHO_AREA = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="image1 != null" >
+        WAHO_IMAGE1 = #{image1,jdbcType=VARCHAR},
+      </if>
+      <if test="image2 != null" >
+        WAHO_IMAGE2 = #{image2,jdbcType=VARCHAR},
+      </if>
+      <if test="image3 != null" >
+        WAHO_IMAGE3 = #{image3,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        WAHO_INTRODUCE = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="persId != null" >
+        WAHO_PERS_ID = #{persId,jdbcType=VARCHAR},
+      </if>
+      <if test="preferential != null" >
+        WAHO_PREFERENTIAL = #{preferential,jdbcType=VARCHAR},
+      </if>
+      <if test="longi != null" >
+        WAHO_LONG = #{longi,jdbcType=DECIMAL},
+      </if>
+      <if test="lati != null" >
+        WAHO_LATI = #{lati,jdbcType=DECIMAL},
+      </if>
+      <if test="briaddr != null" >
+        WAHO_BRIADDR = #{briaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="disLevel1 != null" >
+        WAHO_DIS_LEVEL1 = #{disLevel1,jdbcType=VARCHAR},
+      </if>
+      <if test="disLevel2 != null" >
+        WAHO_DIS_LEVEL2 = #{disLevel2,jdbcType=VARCHAR},
+      </if>
+      <if test="disLevel3 != null" >
+        WAHO_DIS_LEVEL3 = #{disLevel3,jdbcType=VARCHAR},
+      </if>
+      <if test="image4 != null" >
+        WAHO_IMAGE4 = #{image4,jdbcType=VARCHAR},
+      </if>
+      <if test="image5 != null" >
+        WAHO_IMAGE5 = #{image5,jdbcType=VARCHAR},
+      </if>
+      <if test="image6 != null" >
+        WAHO_IMAGE6 = #{image6,jdbcType=VARCHAR},
+      </if>
+      <if test="image7 != null" >
+        WAHO_IMAGE7 = #{image7,jdbcType=VARCHAR},
+      </if>
+      <if test="adv1 != null" >
+        WAHO_ADV1 = #{adv1,jdbcType=VARCHAR},
+      </if>
+      <if test="adv2 != null" >
+        WAHO_ADV2 = #{adv2,jdbcType=VARCHAR},
+      </if>
+      <if test="smonthPrice != null" >
+        WAHO_SMONTH_PRICE = #{smonthPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="sdayPrice != null" >
+        WAHO_SDAY_PRICE = #{sdayPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="mmonthPrice != null" >
+        WAHO_MMONTH_PRICE = #{mmonthPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="mdayPrice != null" >
+        WAHO_MDAY_PRICE = #{mdayPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="bmonthPrice != null" >
+        WAHO_BMONTH_PRICE = #{bmonthPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="bdayPrice != null" >
+        WAHO_BDAY_PRICE = #{bdayPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="cmonthPrice != null" >
+        WAHO_CMONTH_PRICE = #{cmonthPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="cdayPrice != null" >
+        WAHO_CDAY_PRICE = #{cdayPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="rmonthPrice != null" >
+        WAHO_RMONTH_PRICE = #{rmonthPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="rdayPrice != null" >
+        WAHO_RDAY_PRICE = #{rdayPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="lmonthPrice != null" >
+        WAHO_LMONTH_PRICE = #{lmonthPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="ldayPrice != null" >
+        WAHO_LDAY_PRICE = #{ldayPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="intelligentImage != null" >
+        WAHO_INTELLIGENT_IMAGE = #{intelligentImage,jdbcType=VARCHAR},
+      </if>
+      <if test="immediateImage != null" >
+        WAHO_IMMEDIATE_IMAGE = #{immediateImage,jdbcType=VARCHAR},
+      </if>
+      <if test="qrcodeUrl != null" >
+        WAHO_QRCODE_URL = #{qrcodeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="priceIntro != null" >
+        WAHO_PRICE_INTRO = #{priceIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="hourStart != null" >
+        WAHO_HOUR_START = #{hourStart,jdbcType=VARCHAR},
+      </if>
+      <if test="hourRenew != null" >
+        WAHO_HOUR_RENEW = #{hourRenew,jdbcType=VARCHAR},
+      </if>
+      <if test="dayStart != null" >
+        WAHO_DAY_START = #{dayStart,jdbcType=VARCHAR},
+      </if>
+      <if test="dayRenew != null" >
+        WAHO_DAY_RENEW = #{dayRenew,jdbcType=VARCHAR},
+      </if>
+      <if test="monthStart != null" >
+        WAHO_MONTH_START = #{monthStart,jdbcType=VARCHAR},
+      </if>
+      <if test="monthRenew != null" >
+        WAHO_MONTH_RENEW = #{monthRenew,jdbcType=VARCHAR},
+      </if>
+      <if test="propertyType != null" >
+        WAHO_PROPERTY_TYPE = #{propertyType,jdbcType=VARCHAR},
+      </if>
+      <if test="imageQrcode != null" >
+        WAHO_IMAGEQRCODE = #{imageQrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="adv3 != null" >
+        WAHO_ADV3 = #{adv3,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatPublicNumber != null" >
+        WAHO_WECHATPUBLICNUMBER = #{wechatPublicNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineDate != null" >
+        WAHO_ONLINE_DATE = #{onlineDate,jdbcType=VARCHAR},
+      </if>
+      <if test="contactor != null" >
+        WAHO_CONTACTOR = #{contactor,jdbcType=VARCHAR},
+      </if>
+      <if test="openingTime != null" >
+        WAHO_OPENING_TIME = #{openingTime,jdbcType=VARCHAR},
+      </if>
+      <if test="projId != null" >
+        WAHO_PROJ_ID = #{projId,jdbcType=VARCHAR},
+      </if>
+      <if test="colsingTime != null" >
+        WAHO_COLSING_TIME = #{colsingTime,jdbcType=VARCHAR},
+      </if>
+      <if test="cabinetGroup != null" >
+        WAHO_CABINET_GROUP = #{cabinetGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="cabinetNumber != null" >
+        WAHO_CABINET_NUMBER = #{cabinetNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="busineHours != null" >
+        WAHO_BUSINE_HOURS = #{busineHours,jdbcType=VARCHAR},
+      </if>
+      <if test="isCheck != null" >
+        WAHO_IS_CHECK = #{isCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="qrcodeUrlOld != null" >
+        WAHO_QRCODE_URL_OLD = #{qrcodeUrlOld,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WAHO_ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.whc.aip.storage.model.warehouse.Warehouse" >
+    update WHC_WAREHOUSE
+    set WAHO_NAME = #{name,jdbcType=VARCHAR},
+    WAHO_PROVINCE = #{province,jdbcType=VARCHAR},
+    WAHO_CITY = #{city,jdbcType=VARCHAR},
+    WAHO_ADDR = #{addr,jdbcType=VARCHAR},
+    WAHO_STATUS = #{status,jdbcType=VARCHAR},
+    WAHO_TYPE = #{type,jdbcType=VARCHAR},
+    WAHO_AREA = #{area,jdbcType=VARCHAR},
+    WAHO_IMAGE1 = #{image1,jdbcType=VARCHAR},
+    WAHO_IMAGE2 = #{image2,jdbcType=VARCHAR},
+    WAHO_IMAGE3 = #{image3,jdbcType=VARCHAR},
+    WAHO_INTRODUCE = #{introduce,jdbcType=VARCHAR},
+    WAHO_PERS_ID = #{persId,jdbcType=VARCHAR},
+    WAHO_PREFERENTIAL = #{preferential,jdbcType=VARCHAR},
+    WAHO_LONG = #{longi,jdbcType=DECIMAL},
+    WAHO_LATI = #{lati,jdbcType=DECIMAL},
+    WAHO_BRIADDR = #{briaddr,jdbcType=VARCHAR},
+    WAHO_DIS_LEVEL1 = #{disLevel1,jdbcType=VARCHAR},
+    WAHO_DIS_LEVEL2 = #{disLevel2,jdbcType=VARCHAR},
+    WAHO_DIS_LEVEL3 = #{disLevel3,jdbcType=VARCHAR},
+    WAHO_IMAGE4 = #{image4,jdbcType=VARCHAR},
+    WAHO_IMAGE5 = #{image5,jdbcType=VARCHAR},
+    WAHO_IMAGE6 = #{image6,jdbcType=VARCHAR},
+    WAHO_IMAGE7 = #{image7,jdbcType=VARCHAR},
+    WAHO_ADV1 = #{adv1,jdbcType=VARCHAR},
+    WAHO_ADV2 = #{adv2,jdbcType=VARCHAR},
+    WAHO_SMONTH_PRICE = #{smonthPrice,jdbcType=VARCHAR},
+    WAHO_SDAY_PRICE = #{sdayPrice,jdbcType=VARCHAR},
+    WAHO_MMONTH_PRICE = #{mmonthPrice,jdbcType=VARCHAR},
+    WAHO_MDAY_PRICE = #{mdayPrice,jdbcType=VARCHAR},
+    WAHO_BMONTH_PRICE = #{bmonthPrice,jdbcType=VARCHAR},
+    WAHO_BDAY_PRICE = #{bdayPrice,jdbcType=VARCHAR},
+    WAHO_CMONTH_PRICE = #{cmonthPrice,jdbcType=VARCHAR},
+    WAHO_CDAY_PRICE = #{cdayPrice,jdbcType=VARCHAR},
+    WAHO_RMONTH_PRICE = #{rmonthPrice,jdbcType=VARCHAR},
+    WAHO_RDAY_PRICE = #{rdayPrice,jdbcType=VARCHAR},
+    WAHO_LMONTH_PRICE = #{lmonthPrice,jdbcType=VARCHAR},
+    WAHO_LDAY_PRICE = #{ldayPrice,jdbcType=VARCHAR},
+    WAHO_INTELLIGENT_IMAGE = #{intelligentImage,jdbcType=VARCHAR},
+    WAHO_IMMEDIATE_IMAGE = #{immediateImage,jdbcType=VARCHAR},
+    WAHO_QRCODE_URL = #{qrcodeUrl,jdbcType=VARCHAR},
+    WAHO_PRICE_INTRO = #{priceIntro,jdbcType=VARCHAR},
+    WAHO_HOUR_START = #{hourStart,jdbcType=VARCHAR},
+    WAHO_HOUR_RENEW = #{hourRenew,jdbcType=VARCHAR},
+    WAHO_DAY_START = #{dayStart,jdbcType=VARCHAR},
+    WAHO_DAY_RENEW = #{dayRenew,jdbcType=VARCHAR},
+    WAHO_MONTH_START = #{monthStart,jdbcType=VARCHAR},
+    WAHO_MONTH_RENEW = #{monthRenew,jdbcType=VARCHAR},
+    WAHO_PROPERTY_TYPE = #{propertyType,jdbcType=VARCHAR},
+    WAHO_IMAGEQRCODE = #{imageQrcode,jdbcType=VARCHAR},
+    WAHO_ADV3 = #{adv3,jdbcType=VARCHAR},
+    WAHO_WECHATPUBLICNUMBER = #{wechatPublicNumber,jdbcType=VARCHAR},
+    WAHO_ONLINE_DATE = #{onlineDate,jdbcType=VARCHAR},
+    WAHO_CONTACTOR = #{contactor,jdbcType=VARCHAR},
+    WAHO_OPENING_TIME = #{openingTime,jdbcType=VARCHAR},
+    WAHO_PROJ_ID = #{projId,jdbcType=VARCHAR},
+    WAHO_COLSING_TIME = #{colsingTime,jdbcType=VARCHAR},
+    WAHO_CABINET_GROUP = #{cabinetGroup,jdbcType=VARCHAR},
+    WAHO_CABINET_NUMBER = #{cabinetNumber,jdbcType=VARCHAR},
+    WAHO_BUSINE_HOURS = #{busineHours,jdbcType=VARCHAR},
+    WAHO_IS_CHECK = #{isCheck,jdbcType=VARCHAR},
+    WAHO_QRCODE_URL_OLD = #{qrcodeUrlOld,jdbcType=VARCHAR}
+    where WAHO_ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="WarehouseListInfoMap" type="com.whc.aip.storage.model.warehouse.WarehouseList">
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="addr" property="addr" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="image1" property="image1" jdbcType="VARCHAR" />
+    <result column="image2" property="image2" jdbcType="VARCHAR" />
+    <result column="image3" property="image3" jdbcType="VARCHAR" />
+    <result column="introduce" property="introduce" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="VARCHAR" />
+    <result column="type1" property="type1" jdbcType="VARCHAR" />
+    <result column="type2" property="type2" jdbcType="VARCHAR" />
+    <result column="type3" property="type3" jdbcType="VARCHAR" />
+    <result column="type4" property="type4" jdbcType="VARCHAR" />
+    <result column="type5" property="type5" jdbcType="VARCHAR" />
+    <result column="type6" property="type6" jdbcType="VARCHAR" />
+    <result column="type7" property="type7" jdbcType="VARCHAR" />
+    <result column="type8" property="type8" jdbcType="VARCHAR" />
+    <result column="type9" property="type9" jdbcType="VARCHAR" />
+    <result column="longi" property="longi" jdbcType="VARCHAR" />
+    <result column="lati" property="lati" jdbcType="VARCHAR" />
+    <result column="disLevel1" property="disLevel1" jdbcType="VARCHAR" />
+    <result column="disLevel2" property="disLevel2" jdbcType="VARCHAR" />
+    <result column="disLevel3" property="disLevel3" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="getWarehouseList" resultMap="WarehouseListInfoMap">
+    select * from(
+    select
+    w.waho_id   as "id",
+    w.waho_name   as "name",
+    w.waho_province as "province",
+    w.waho_city as "city",
+    w.waho_addr as "addr",
+    w.waho_status as "status",
+    w.waho_type as "type",
+    w.waho_area as "area",
+    w.waho_image1 as "image1",
+    w.waho_image2 as "image2",
+    w.waho_image3 as "image3",
+    w.waho_introduce as "introduce",
+    nvl("specialPrice",
+    TO_char(nvl("monthPrice",0))) as "price",
+    nvl(t1."type1", 0) as "type1",
+    nvl(t2."type2", 0) as "type2",
+    nvl(t3."type3", 0) as "type3",
+    nvl(t4."type4", 0) as "type4",
+    nvl(t5."type5", 0) as "type5",
+    nvl(t6."type6", 0) as "type6",
+    nvl(t7."type7", 0) as "type7",
+    nvl(t8."type8", 0) as "type8",
+    nvl(t9."type9", 0) as "type9",
+    w.waho_long as "longi",
+    w.waho_lati as "lati",
+    w.waho_dis_level1 as "disLevel1",
+    w.waho_dis_level2 as "disLevel2",
+    w.waho_dis_level3 as "disLevel3"
+
+    from whc_warehouse w
+    left join
+    (select min(to_number(c.watypr_month_price)) as "monthPrice", c.waho_id from whc_wahoce_type_price c group by c.waho_id) t on w.waho_id = t.waho_id
+
+    left join
+    (select min(c.watypr_special_price) as "specialPrice", c.waho_id from whc_wahoce_type_price c group by c.waho_id) tt on w.waho_id = tt.waho_id
+    left join
+    (select count(*) as "type1", c.waho_id from whc_warehouse_cell c where c.wahoce_type = '1' group by c.waho_id ) t1 on w.waho_id = t1.waho_id
+    left join
+    (select count(*) as "type2", c.waho_id from whc_warehouse_cell c where c.wahoce_type = '2' group by c.waho_id ) t2 on w.waho_id = t2.waho_id
+    left join
+    (select count(*) as "type3", c.waho_id from whc_warehouse_cell c where c.wahoce_type = '3' group by c.waho_id ) t3 on w.waho_id = t3.waho_id
+    left join
+    (select count(*) as "type4", c.waho_id from whc_warehouse_cell c where c.wahoce_type = '4' group by c.waho_id ) t4 on w.waho_id = t4.waho_id
+    left join
+    (select count(*) as "type5", c.waho_id from whc_warehouse_cell c where c.wahoce_type = '5' group by c.waho_id ) t5 on w.waho_id = t5.waho_id
+    left join
+    (select count(*) as "type6", c.waho_id from whc_warehouse_cell c where c.wahoce_type = '6' group by c.waho_id ) t6 on w.waho_id = t6.waho_id
+    left join
+    (select count(*) as "type7", c.waho_id from whc_warehouse_cell c where c.wahoce_type = '7' group by c.waho_id ) t7 on w.waho_id = t7.waho_id
+    left join
+    (select count(*) as "type8", c.waho_id from whc_warehouse_cell c where c.wahoce_type = '8' group by c.waho_id ) t8 on w.waho_id = t8.waho_id
+    left join
+    (select count(*) as "type9", c.waho_id from whc_warehouse_cell c where c.wahoce_type = '9' group by c.waho_id ) t9 on w.waho_id = t9.waho_id
+    where
+    (#{keyWord} is null or w.waho_name like '%'||#{keyWord}||'%' or w.waho_area like '%'||#{keyWord}||'%')
+    and w.waho_status = '2' and w.waho_type='0'
+    and(#{type} is null or w.waho_type=#{type})
+    union all
+    select
+    w.waho_id   as "id",
+    w.waho_name   as "name",
+    w.waho_province as "province",
+    w.waho_city as "city",
+    w.waho_addr as "addr",
+    w.waho_status as "status",
+    w.waho_type as "type",
+    w.waho_area as "area",
+    w.waho_image1 as "image1",
+    w.waho_image2 as "image2",
+    w.waho_image3 as "image3",
+    w.waho_introduce as "introduce",
+    t."price" as "prcie",
+    nvl(t1."type1", 0) as "type1",
+    nvl(t2."type2", 0) as "type2",
+    nvl(t3."type3", 0) as "type3",
+    nvl(t4."type4", 0) as "type4",
+    nvl(t5."type5", 0) as "type5",
+    nvl(t6."type6", 0) as "type6",
+    nvl(t7."type7", 0) as "type7",
+    nvl(t8."type8", 0) as "type8",
+    nvl(t9."type9", 0) as "type9",
+    w.waho_long as "longi",
+    w.waho_lati as "lati",
+    w.waho_dis_level1 as "disLevel1",
+    w.waho_dis_level2 as "disLevel2",
+    w.waho_dis_level3 as "disLevel3"
+
+    from whc_warehouse w
+    left join (
+    select min(TO_char(a,'990.99')) as "price",t."pWahoId" from
+    (
+    select min(to_number(p.imwapr_size1_price)) a,p.waho_id as "pWahoId"
+    from whc_immediate_wahoce_price p
+    where p.imwapr_size1_price!='0'
+    group by p.waho_id
+    union all
+    select min(to_number(p.imwapr_size2_price)) a,p.waho_id as "pWahoId"
+    from whc_immediate_wahoce_price p
+    where p.imwapr_size2_price!='0'
+    group by p.waho_id
+    union all
+    select min(to_number(p.imwapr_size3_price)) a,p.waho_id as "pWahoId"
+    from whc_immediate_wahoce_price p
+    where p.imwapr_size3_price!='0'
+    group by p.waho_id
+    union all
+    select min(to_number(p.imwapr_size4_price)) a,p.waho_id as "pWahoId"
+    from whc_immediate_wahoce_price p
+    where p.imwapr_size4_price!='0'
+    group by p.waho_id
+    )t group by t."pWahoId"
+    )t on t."pWahoId"=w.waho_id
+    left join
+    (select min(c.watypr_special_price) as "specialPrice", c.waho_id from whc_wahoce_type_price c group by c.waho_id) tt on w.waho_id = tt.waho_id
+    left join
+    (select count(*) as "type1", c.waho_id from whc_warehouse_cell c where c.wahoce_type = '1' group by c.waho_id ) t1 on w.waho_id = t1.waho_id
+    left join
+    (select count(*) as "type2", c.waho_id from whc_warehouse_cell c where c.wahoce_type = '2' group by c.waho_id ) t2 on w.waho_id = t2.waho_id
+    left join
+    (select count(*) as "type3", c.waho_id from whc_warehouse_cell c where c.wahoce_type = '3' group by c.waho_id ) t3 on w.waho_id = t3.waho_id
+    left join
+    (select count(*) as "type4", c.waho_id from whc_warehouse_cell c where c.wahoce_type = '4' group by c.waho_id ) t4 on w.waho_id = t4.waho_id
+    left join
+    (select count(*) as "type5", c.waho_id from whc_warehouse_cell c where c.wahoce_type = '5' group by c.waho_id ) t5 on w.waho_id = t5.waho_id
+    left join
+    (select count(*) as "type6", c.waho_id from whc_warehouse_cell c where c.wahoce_type = '6' group by c.waho_id ) t6 on w.waho_id = t6.waho_id
+    left join
+    (select count(*) as "type7", c.waho_id from whc_warehouse_cell c where c.wahoce_type = '7' group by c.waho_id ) t7 on w.waho_id = t7.waho_id
+    left join
+    (select count(*) as "type8", c.waho_id from whc_warehouse_cell c where c.wahoce_type = '8' group by c.waho_id ) t8 on w.waho_id = t8.waho_id
+    left join
+    (select count(*) as "type9", c.waho_id from whc_warehouse_cell c where c.wahoce_type = '9' group by c.waho_id ) t9 on w.waho_id = t9.waho_id
+    where
+    (#{keyWord} is null or w.waho_name like '%'||#{keyWord}||'%' or w.waho_area like '%'||#{keyWord}||'%')
+    and w.waho_status = '2' and w.waho_type='1'
+    and(#{type} is null or w.waho_type=#{type})
+    )
+    order by "name" asc
+  </select>
+  <resultMap id="getWarehouseInfoMap" type="com.whc.aip.storage.model.warehouse.Warehouse" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="addr" property="addr" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="image1" property="image1" jdbcType="VARCHAR" />
+    <result column="image2" property="image2" jdbcType="VARCHAR" />
+    <result column="image3" property="image3" jdbcType="VARCHAR" />
+    <result column="introduce" property="introduce" jdbcType="VARCHAR" />
+    <result column="persId" property="persId" jdbcType="VARCHAR" />
+    <result column="preferential" property="preferential" jdbcType="VARCHAR" />
+    <result column="longi" property="longi" jdbcType="VARCHAR" />
+    <result column="lati" property="lati" jdbcType="VARCHAR" />
+    <result column="briaddr" property="briaddr" jdbcType="VARCHAR" />
+    <result column="disLevel1" property="disLevel1" jdbcType="VARCHAR" />
+    <result column="disLevel2" property="disLevel2" jdbcType="VARCHAR" />
+    <result column="disLevel3" property="disLevel3" jdbcType="VARCHAR" />
+    <result column="image4" property="image4" jdbcType="VARCHAR" />
+    <result column="image5" property="image5" jdbcType="VARCHAR" />
+    <result column="image6" property="image6" jdbcType="VARCHAR" />
+    <result column="image7" property="image7" jdbcType="VARCHAR" />
+    <result column="adv1" property="adv1" jdbcType="VARCHAR" />
+    <result column="adv2" property="adv2" jdbcType="VARCHAR" />
+    <result column="smonthPrice" property="smonthPrice" jdbcType="VARCHAR" />
+    <result column="sdayPrice" property="sdayPrice" jdbcType="VARCHAR" />
+    <result column="mmonthPrice" property="mmonthPrice" jdbcType="VARCHAR" />
+    <result column="mdayPrice" property="mdayPrice" jdbcType="VARCHAR" />
+    <result column="bmonthPrice" property="bmonthPrice" jdbcType="VARCHAR" />
+    <result column="bdayPrice" property="bdayPrice" jdbcType="VARCHAR" />
+    <result column="cmonthPrice" property="cmonthPrice" jdbcType="VARCHAR" />
+    <result column="cdayPrice" property="cdayPrice" jdbcType="VARCHAR" />
+    <result column="rmonthPrice" property="rmonthPrice" jdbcType="VARCHAR" />
+    <result column="rdayPrice" property="rdayPrice" jdbcType="VARCHAR" />
+    <result column="lmonthPrice" property="lmonthPrice" jdbcType="VARCHAR" />
+    <result column="ldayPrice" property="ldayPrice" jdbcType="VARCHAR" />
+    <result column="intelligentImage" property="intelligentImage" jdbcType="VARCHAR" />
+    <result column="immediateImage" property="immediateImage" jdbcType="VARCHAR" />
+    <result column="qrcodeUrl" property="qrcodeUrl" jdbcType="VARCHAR" />
+    <result column="priceIntro" property="priceIntro" jdbcType="VARCHAR" />
+    <result column="hourStart" property="hourStart" jdbcType="VARCHAR" />
+    <result column="hourRenew" property="hourRenew" jdbcType="VARCHAR" />
+    <result column="dayStart" property="dayStart" jdbcType="VARCHAR" />
+    <result column="dayRenew" property="dayRenew" jdbcType="VARCHAR" />
+    <result column="monthStart" property="monthStart" jdbcType="VARCHAR" />
+    <result column="monthRenew" property="monthRenew" jdbcType="VARCHAR" />
+    <result column="propertyType" property="propertyType" jdbcType="VARCHAR" />
+    <result column="imageQrcode" property="imageQrcode" jdbcType="VARCHAR" />
+    <result column="adv3" property="adv3" jdbcType="VARCHAR" />
+    <result column="wechatPublicNumber" property="wechatPublicNumber" jdbcType="VARCHAR" />
+    <result column="onlineDate" property="onlineDate" jdbcType="VARCHAR" />
+    <result column="contactor" property="contactor" jdbcType="VARCHAR" />
+    <result column="openingTime" property="openingTime" jdbcType="VARCHAR" />
+    <result column="projId" property="projId" jdbcType="VARCHAR" />
+    <result column="colsingTime" property="colsingTime" jdbcType="VARCHAR" />
+    <result column="cabinetGroup" property="cabinetGroup" jdbcType="VARCHAR" />
+    <result column="cabinetNumber" property="cabinetNumber" jdbcType="VARCHAR" />
+    <result column="busineHours" property="busineHours" jdbcType="VARCHAR" />
+    <result column="isCheck" property="isCheck" jdbcType="VARCHAR" />
+    <result column="qrcodeUrlOld" property="qrcodeUrlOld" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="getWarehouseInfo" resultMap="getWarehouseInfoMap">
+    select wh.waho_id as "id",wh.waho_name as "name",
+    wh.waho_province as "province",wh.waho_city as "city",
+    wh.waho_addr as "addr",wh.waho_status as "status",
+    wh.waho_type as "type",wh.waho_area as "area",wh.waho_image1 as "image1",
+    wh.waho_image2 as "image2",wh.waho_image3 as "image3",wh.waho_introduce as "introduce",
+    wh.waho_pers_id as "persId",wh.waho_preferential as "preferential",wh.waho_long as "longi",
+    wh.waho_lati as "lati",wh.waho_briaddr as "briaddr",wh.waho_dis_level1 as "disLevel1",
+    wh.waho_dis_level2 as "disLevel2",wh.waho_dis_level3 as "disLevel3",wh.waho_image4 as "image4",
+    wh.waho_image5 as "image5",wh.waho_image6 as "image6",wh.waho_image7 as "image7",
+    wh.waho_adv1 as "adv1",wh.waho_adv2 as "adv2",wh.waho_smonth_price as "smonthPrice",
+    wh.waho_sday_price as "sdayPrice",wh.waho_mmonth_price as "mmonthPrice",wh.waho_mday_price as "mdayPrice",
+    wh.waho_bmonth_price as "bmonthPrice",wh.waho_bday_price as "bdayPrice",wh.waho_cmonth_price as "cmonthPrice",
+    wh.waho_cday_price as "cdayPrice",wh.waho_rmonth_price as "rmonthPrice",wh.waho_rday_price as "rdayPrice",
+    wh.waho_lmonth_price as "lmonthPrice",wh.waho_lday_price as "ldayPrice",wh.waho_intelligent_image as "intelligentImage",
+    wh.waho_immediate_image as "immediateImage",wh.waho_qrcode_url as "qrcodeUrl",wh.waho_price_intro as "priceIntro",
+    wh.waho_hour_start as "hourStart",wh.waho_hour_renew as "hourRenew",wh.waho_day_start as "dayStart",
+    wh.waho_day_renew as "dayRenew",wh.waho_month_start as "monthStart",wh.waho_month_renew as "monthRenew",
+    wh.waho_property_type as "propertyType",wh.waho_imageqrcode as "imageQrcode",wh.waho_adv3 as "adv3",
+    wh.waho_wechatpublicnumber as "wechatPublicNumber",wh.waho_online_date as "onlineDate",
+    wh.waho_contactor as "contactor",wh.waho_opening_time as "openingTime",wh.waho_proj_id as "projId",
+    wh.waho_colsing_time as "colsingTime",wh.waho_cabinet_group as "cabinetGroup",wh.waho_cabinet_number as "cabinetNumber",
+    wh.waho_busine_hours as "busineHours",wh.waho_is_check as "isCheck",wh.waho_qrcode_url_old as "qrcodeUrlOld"
+    from whc_warehouse wh where wh.waho_id = #{id}
+  </select>
+  <resultMap id="getWarehouseTypeMap" type="com.whc.aip.storage.model.warehouse.Warehouse">
+    <result column="type" property="type" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="getWarehouseType" resultMap="getWarehouseTypeMap">
+    select wh.waho_type as "type" from whc_warehouse wh where wh.waho_id=#{wahoId}
+  </select>
+</mapper>

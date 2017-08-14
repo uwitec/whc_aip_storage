@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whc.aip.storage.dao.storage.WeigateDoorMapper" >
+  <resultMap id="BaseResultMap" type="com.whc.aip.storage.model.storage.weigateDoor" >
+    <id column="DOOR_ID" property="doorId" jdbcType="VARCHAR" />
+    <result column="COMM_ID" property="commId" jdbcType="VARCHAR" />
+    <result column="DOOR_LATI" property="lati" jdbcType="DECIMAL" />
+    <result column="DOOR_LONGI" property="longi" jdbcType="DECIMAL" />
+    <result column="DOOR_VERIFY_DISTANCE" property="verifyDistance" jdbcType="DECIMAL" />
+    <result column="DEVICE_NO" property="deviceNo" jdbcType="VARCHAR" />
+    <result column="DOOR_STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="DOOR_ISDEL" property="isDel" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DOOR_ID, COMM_ID, DOOR_LATI, DOOR_LONGI, DOOR_VERIFY_DISTANCE, DEVICE_NO, DOOR_STATUS, 
+    DOOR_ISDEL
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.whc.aip.storage.model.storage.weigateDoorExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from WEIGATE_DOOR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from WEIGATE_DOOR
+    where DOOR_ID = #{doorId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from WEIGATE_DOOR
+    where DOOR_ID = #{doorId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.whc.aip.storage.model.storage.weigateDoorExample" >
+    delete from WEIGATE_DOOR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.whc.aip.storage.model.storage.weigateDoor" >
+    <selectKey resultType="java.lang.String" keyProperty="doorId" order="BEFORE" >
+      select sys_guid() from dual
+    </selectKey>
+    insert into WEIGATE_DOOR (DOOR_ID, COMM_ID, DOOR_LATI, 
+      DOOR_LONGI, DOOR_VERIFY_DISTANCE, DEVICE_NO, 
+      DOOR_STATUS, DOOR_ISDEL)
+    values (#{doorId,jdbcType=VARCHAR}, #{commId,jdbcType=VARCHAR}, #{lati,jdbcType=DECIMAL}, 
+      #{longi,jdbcType=DECIMAL}, #{verifyDistance,jdbcType=DECIMAL}, #{deviceNo,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{isDel,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.whc.aip.storage.model.storage.weigateDoor" >
+    <selectKey resultType="java.lang.String" keyProperty="doorId" order="BEFORE" >
+      select sys_guid() from dual
+    </selectKey>
+    insert into WEIGATE_DOOR
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      DOOR_ID,
+      <if test="commId != null" >
+        COMM_ID,
+      </if>
+      <if test="lati != null" >
+        DOOR_LATI,
+      </if>
+      <if test="longi != null" >
+        DOOR_LONGI,
+      </if>
+      <if test="verifyDistance != null" >
+        DOOR_VERIFY_DISTANCE,
+      </if>
+      <if test="deviceNo != null" >
+        DEVICE_NO,
+      </if>
+      <if test="status != null" >
+        DOOR_STATUS,
+      </if>
+      <if test="isDel != null" >
+        DOOR_ISDEL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{doorId,jdbcType=VARCHAR},
+      <if test="commId != null" >
+        #{commId,jdbcType=VARCHAR},
+      </if>
+      <if test="lati != null" >
+        #{lati,jdbcType=DECIMAL},
+      </if>
+      <if test="longi != null" >
+        #{longi,jdbcType=DECIMAL},
+      </if>
+      <if test="verifyDistance != null" >
+        #{verifyDistance,jdbcType=DECIMAL},
+      </if>
+      <if test="deviceNo != null" >
+        #{deviceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.whc.aip.storage.model.storage.weigateDoorExample" resultType="java.lang.Integer" >
+    select count(*) from WEIGATE_DOOR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update WEIGATE_DOOR
+    <set >
+      <if test="record.doorId != null" >
+        DOOR_ID = #{record.doorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commId != null" >
+        COMM_ID = #{record.commId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lati != null" >
+        DOOR_LATI = #{record.lati,jdbcType=DECIMAL},
+      </if>
+      <if test="record.longi != null" >
+        DOOR_LONGI = #{record.longi,jdbcType=DECIMAL},
+      </if>
+      <if test="record.verifyDistance != null" >
+        DOOR_VERIFY_DISTANCE = #{record.verifyDistance,jdbcType=DECIMAL},
+      </if>
+      <if test="record.deviceNo != null" >
+        DEVICE_NO = #{record.deviceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        DOOR_STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDel != null" >
+        DOOR_ISDEL = #{record.isDel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update WEIGATE_DOOR
+    set DOOR_ID = #{record.doorId,jdbcType=VARCHAR},
+      COMM_ID = #{record.commId,jdbcType=VARCHAR},
+      DOOR_LATI = #{record.lati,jdbcType=DECIMAL},
+      DOOR_LONGI = #{record.longi,jdbcType=DECIMAL},
+      DOOR_VERIFY_DISTANCE = #{record.verifyDistance,jdbcType=DECIMAL},
+      DEVICE_NO = #{record.deviceNo,jdbcType=VARCHAR},
+      DOOR_STATUS = #{record.status,jdbcType=VARCHAR},
+      DOOR_ISDEL = #{record.isDel,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.whc.aip.storage.model.storage.weigateDoor" >
+    update WEIGATE_DOOR
+    <set >
+      <if test="commId != null" >
+        COMM_ID = #{commId,jdbcType=VARCHAR},
+      </if>
+      <if test="lati != null" >
+        DOOR_LATI = #{lati,jdbcType=DECIMAL},
+      </if>
+      <if test="longi != null" >
+        DOOR_LONGI = #{longi,jdbcType=DECIMAL},
+      </if>
+      <if test="verifyDistance != null" >
+        DOOR_VERIFY_DISTANCE = #{verifyDistance,jdbcType=DECIMAL},
+      </if>
+      <if test="deviceNo != null" >
+        DEVICE_NO = #{deviceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        DOOR_STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null" >
+        DOOR_ISDEL = #{isDel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DOOR_ID = #{doorId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.whc.aip.storage.model.storage.weigateDoor" >
+    update WEIGATE_DOOR
+    set COMM_ID = #{commId,jdbcType=VARCHAR},
+      DOOR_LATI = #{lati,jdbcType=DECIMAL},
+      DOOR_LONGI = #{longi,jdbcType=DECIMAL},
+      DOOR_VERIFY_DISTANCE = #{verifyDistance,jdbcType=DECIMAL},
+      DEVICE_NO = #{deviceNo,jdbcType=VARCHAR},
+      DOOR_STATUS = #{status,jdbcType=VARCHAR},
+      DOOR_ISDEL = #{isDel,jdbcType=VARCHAR}
+    where DOOR_ID = #{doorId,jdbcType=VARCHAR}
+  </update>
+</mapper>

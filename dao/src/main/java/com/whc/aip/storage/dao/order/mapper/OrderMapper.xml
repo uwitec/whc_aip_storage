@@ -1,0 +1,879 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whc.aip.storage.dao.order.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.whc.aip.storage.model.order.Order" >
+    <id column="ORDER_ID" property="id" jdbcType="VARCHAR" />
+    <result column="MEMBER_ID" property="memberId" jdbcType="VARCHAR" />
+    <result column="WAHOCE_ID" property="wahoceId" jdbcType="VARCHAR" />
+    <result column="ORDER_START_DATE" property="startDate" jdbcType="VARCHAR" />
+    <result column="ORDER_END_DATE" property="endDate" jdbcType="VARCHAR" />
+    <result column="ORDER_CUSE_MEMO" property="cuseMemo" jdbcType="VARCHAR" />
+    <result column="ORDER_AMOUNT" property="amount" jdbcType="VARCHAR" />
+    <result column="PERS_ID" property="persId" jdbcType="VARCHAR" />
+    <result column="ORDER_STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="ORDER_TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="ORDER_CREATE_DATE" property="createDate" jdbcType="VARCHAR" />
+    <result column="ORDER_PAY_TYPE" property="payType" jdbcType="VARCHAR" />
+    <result column="ORDER_CUST_MEMO" property="custMemo" jdbcType="VARCHAR" />
+    <result column="ORDER_SALE_MEMO" property="saleMemo" jdbcType="VARCHAR" />
+    <result column="ORDER_CUST_NAME" property="custName" jdbcType="VARCHAR" />
+    <result column="ORDER_CUST_TEL" property="custTel" jdbcType="VARCHAR" />
+    <result column="ORDER_CUST_ADDR" property="custAddr" jdbcType="VARCHAR" />
+    <result column="ORDER_SOURCE" property="source" jdbcType="VARCHAR" />
+    <result column="ORDER_ID_NUMBER" property="idNumber" jdbcType="VARCHAR" />
+    <result column="ORDER_DEPOSIT1" property="deposit1" jdbcType="VARCHAR" />
+    <result column="ORDER_TOTAL_AMOUNT" property="totalAmount" jdbcType="VARCHAR" />
+    <result column="ORDER_AMOUNT_TYPE" property="amountType" jdbcType="VARCHAR" />
+    <result column="ORDER_TYPE_MOENY" property="typeMoeny" jdbcType="VARCHAR" />
+    <result column="CUST_ID" property="custId" jdbcType="VARCHAR" />
+    <result column="ORDER_CERT_TYPE" property="certType" jdbcType="VARCHAR" />
+    <result column="CONTRACT_CODE" property="contractCode" jdbcType="VARCHAR" />
+    <result column="ORDER_DEPOSIT_MEMO" property="depositMemo" jdbcType="VARCHAR" />
+    <result column="ORDER_DEPOSIT_STATUS" property="depositStatus" jdbcType="VARCHAR" />
+    <result column="ORDER_DEPOSITPAY_ACCOUNT" property="depositpayAccount" jdbcType="VARCHAR" />
+    <result column="ORDER_REFUND_ACCOUNT" property="refundAccount" jdbcType="VARCHAR" />
+    <result column="ORDER_PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="ORDER_EXE_ACCOUNT" property="exeAccount" jdbcType="VARCHAR" />
+    <result column="ORDER_DEPOSIT_REMEMO" property="depositRememo" jdbcType="VARCHAR" />
+    <result column="ORDER_DEPOSIT_RETURN" property="depositReturn" jdbcType="VARCHAR" />
+    <result column="ORDER_AMOUNT_RETURN" property="amountReturn" jdbcType="VARCHAR" />
+    <result column="ORDER_OVER_DATE" property="overDate" jdbcType="VARCHAR" />
+    <result column="ORDER_CERT_IMAGE" property="certImage" jdbcType="VARCHAR" />
+    <result column="ORDER_CERT_IMAGE1" property="certImage1" jdbcType="VARCHAR" />
+    <result column="ORDER_NEXT_ORDER" property="nextOrder" jdbcType="VARCHAR" />
+    <result column="ORDER_NEXT_END_DATE" property="nextEndDate" jdbcType="VARCHAR" />
+    <result column="ORDER_NEXT_AMOUNT" property="nextAmount" jdbcType="VARCHAR" />
+    <result column="ORDER_RETURN_CELL_TIME" property="returnCellTime" jdbcType="VARCHAR" />
+    <result column="ORDER_UNIT" property="unit" jdbcType="VARCHAR" />
+    <result column="ORDER_NUMBER" property="number" jdbcType="VARCHAR" />
+    <result column="ORDER_IS_DISPLAY" property="isDisplay" jdbcType="VARCHAR" />
+    <result column="ORDER_PASSWORD" property="ORDER_PASSWORD" jdbcType="VARCHAR" />
+    <result column="ORDER_TOTAL_TIMES" property="totalTimes" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ORDER_ID, MEMBER_ID, WAHOCE_ID, ORDER_START_DATE, ORDER_END_DATE, ORDER_CUSE_MEMO, 
+    ORDER_AMOUNT, PERS_ID, ORDER_STATUS, ORDER_TYPE, ORDER_CREATE_DATE, ORDER_PAY_TYPE, 
+    ORDER_CUST_MEMO, ORDER_SALE_MEMO, ORDER_CUST_NAME, ORDER_CUST_TEL, ORDER_CUST_ADDR, 
+    ORDER_SOURCE, ORDER_ID_NUMBER, ORDER_DEPOSIT1, ORDER_TOTAL_AMOUNT, ORDER_AMOUNT_TYPE, 
+    ORDER_TYPE_MOENY, CUST_ID, ORDER_CERT_TYPE, CONTRACT_CODE, ORDER_DEPOSIT_MEMO, ORDER_DEPOSIT_STATUS, 
+    ORDER_DEPOSITPAY_ACCOUNT, ORDER_REFUND_ACCOUNT, ORDER_PHONE, ORDER_EXE_ACCOUNT, ORDER_DEPOSIT_REMEMO, 
+    ORDER_DEPOSIT_RETURN, ORDER_AMOUNT_RETURN, ORDER_OVER_DATE, ORDER_CERT_IMAGE, ORDER_CERT_IMAGE1, 
+    ORDER_NEXT_ORDER, ORDER_NEXT_END_DATE, ORDER_NEXT_AMOUNT, ORDER_RETURN_CELL_TIME, 
+    ORDER_UNIT, ORDER_NUMBER, ORDER_IS_DISPLAY, ORDER_PASSWORD, ORDER_TOTAL_TIMES
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.whc.aip.storage.model.order.OrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from WHC_ORDER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from WHC_ORDER
+    where ORDER_ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from WHC_ORDER
+    where ORDER_ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.whc.aip.storage.model.order.OrderExample" >
+    delete from WHC_ORDER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.whc.aip.storage.model.order.Order" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      select sys_guid() from dual
+    </selectKey>
+    insert into WHC_ORDER (ORDER_ID, MEMBER_ID, WAHOCE_ID, 
+      ORDER_START_DATE, ORDER_END_DATE, ORDER_CUSE_MEMO, 
+      ORDER_AMOUNT, PERS_ID, ORDER_STATUS, 
+      ORDER_TYPE, ORDER_CREATE_DATE, ORDER_PAY_TYPE, 
+      ORDER_CUST_MEMO, ORDER_SALE_MEMO, ORDER_CUST_NAME, 
+      ORDER_CUST_TEL, ORDER_CUST_ADDR, ORDER_SOURCE, 
+      ORDER_ID_NUMBER, ORDER_DEPOSIT1, ORDER_TOTAL_AMOUNT, 
+      ORDER_AMOUNT_TYPE, ORDER_TYPE_MOENY, CUST_ID, 
+      ORDER_CERT_TYPE, CONTRACT_CODE, ORDER_DEPOSIT_MEMO, 
+      ORDER_DEPOSIT_STATUS, ORDER_DEPOSITPAY_ACCOUNT, ORDER_REFUND_ACCOUNT, 
+      ORDER_PHONE, ORDER_EXE_ACCOUNT, ORDER_DEPOSIT_REMEMO, 
+      ORDER_DEPOSIT_RETURN, ORDER_AMOUNT_RETURN, ORDER_OVER_DATE, 
+      ORDER_CERT_IMAGE, ORDER_CERT_IMAGE1, ORDER_NEXT_ORDER, 
+      ORDER_NEXT_END_DATE, ORDER_NEXT_AMOUNT, ORDER_RETURN_CELL_TIME, 
+      ORDER_UNIT, ORDER_NUMBER, ORDER_IS_DISPLAY, 
+      ORDER_PASSWORD, ORDER_TOTAL_TIMES)
+    values (#{id,jdbcType=VARCHAR}, #{memberId,jdbcType=VARCHAR}, #{wahoceId,jdbcType=VARCHAR}, 
+      #{startDate,jdbcType=VARCHAR}, #{endDate,jdbcType=VARCHAR}, #{cuseMemo,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=VARCHAR}, #{persId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, #{payType,jdbcType=VARCHAR}, 
+      #{custMemo,jdbcType=VARCHAR}, #{saleMemo,jdbcType=VARCHAR}, #{custName,jdbcType=VARCHAR}, 
+      #{custTel,jdbcType=VARCHAR}, #{custAddr,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, 
+      #{idNumber,jdbcType=VARCHAR}, #{deposit1,jdbcType=VARCHAR}, #{totalAmount,jdbcType=VARCHAR}, 
+      #{amountType,jdbcType=VARCHAR}, #{typeMoeny,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR}, 
+      #{certType,jdbcType=VARCHAR}, #{contractCode,jdbcType=VARCHAR}, #{depositMemo,jdbcType=VARCHAR}, 
+      #{depositStatus,jdbcType=VARCHAR}, #{depositpayAccount,jdbcType=VARCHAR}, #{refundAccount,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{exeAccount,jdbcType=VARCHAR}, #{depositRememo,jdbcType=VARCHAR}, 
+      #{depositReturn,jdbcType=VARCHAR}, #{amountReturn,jdbcType=VARCHAR}, #{overDate,jdbcType=VARCHAR}, 
+      #{certImage,jdbcType=VARCHAR}, #{certImage1,jdbcType=VARCHAR}, #{nextOrder,jdbcType=VARCHAR}, 
+      #{nextEndDate,jdbcType=VARCHAR}, #{nextAmount,jdbcType=VARCHAR}, #{returnCellTime,jdbcType=VARCHAR}, 
+      #{unit,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, #{isDisplay,jdbcType=VARCHAR}, 
+      #{ORDER_PASSWORD,jdbcType=VARCHAR}, #{totalTimes,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.whc.aip.storage.model.order.Order" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      select sys_guid() from dual
+    </selectKey>
+    insert into WHC_ORDER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      ORDER_ID,
+      <if test="memberId != null" >
+        MEMBER_ID,
+      </if>
+      <if test="wahoceId != null" >
+        WAHOCE_ID,
+      </if>
+      <if test="startDate != null" >
+        ORDER_START_DATE,
+      </if>
+      <if test="endDate != null" >
+        ORDER_END_DATE,
+      </if>
+      <if test="cuseMemo != null" >
+        ORDER_CUSE_MEMO,
+      </if>
+      <if test="amount != null" >
+        ORDER_AMOUNT,
+      </if>
+      <if test="persId != null" >
+        PERS_ID,
+      </if>
+      <if test="status != null" >
+        ORDER_STATUS,
+      </if>
+      <if test="type != null" >
+        ORDER_TYPE,
+      </if>
+      <if test="createDate != null" >
+        ORDER_CREATE_DATE,
+      </if>
+      <if test="payType != null" >
+        ORDER_PAY_TYPE,
+      </if>
+      <if test="custMemo != null" >
+        ORDER_CUST_MEMO,
+      </if>
+      <if test="saleMemo != null" >
+        ORDER_SALE_MEMO,
+      </if>
+      <if test="custName != null" >
+        ORDER_CUST_NAME,
+      </if>
+      <if test="custTel != null" >
+        ORDER_CUST_TEL,
+      </if>
+      <if test="custAddr != null" >
+        ORDER_CUST_ADDR,
+      </if>
+      <if test="source != null" >
+        ORDER_SOURCE,
+      </if>
+      <if test="idNumber != null" >
+        ORDER_ID_NUMBER,
+      </if>
+      <if test="deposit1 != null" >
+        ORDER_DEPOSIT1,
+      </if>
+      <if test="totalAmount != null" >
+        ORDER_TOTAL_AMOUNT,
+      </if>
+      <if test="amountType != null" >
+        ORDER_AMOUNT_TYPE,
+      </if>
+      <if test="typeMoeny != null" >
+        ORDER_TYPE_MOENY,
+      </if>
+      <if test="custId != null" >
+        CUST_ID,
+      </if>
+      <if test="certType != null" >
+        ORDER_CERT_TYPE,
+      </if>
+      <if test="contractCode != null" >
+        CONTRACT_CODE,
+      </if>
+      <if test="depositMemo != null" >
+        ORDER_DEPOSIT_MEMO,
+      </if>
+      <if test="depositStatus != null" >
+        ORDER_DEPOSIT_STATUS,
+      </if>
+      <if test="depositpayAccount != null" >
+        ORDER_DEPOSITPAY_ACCOUNT,
+      </if>
+      <if test="refundAccount != null" >
+        ORDER_REFUND_ACCOUNT,
+      </if>
+      <if test="phone != null" >
+        ORDER_PHONE,
+      </if>
+      <if test="exeAccount != null" >
+        ORDER_EXE_ACCOUNT,
+      </if>
+      <if test="depositRememo != null" >
+        ORDER_DEPOSIT_REMEMO,
+      </if>
+      <if test="depositReturn != null" >
+        ORDER_DEPOSIT_RETURN,
+      </if>
+      <if test="amountReturn != null" >
+        ORDER_AMOUNT_RETURN,
+      </if>
+      <if test="overDate != null" >
+        ORDER_OVER_DATE,
+      </if>
+      <if test="certImage != null" >
+        ORDER_CERT_IMAGE,
+      </if>
+      <if test="certImage1 != null" >
+        ORDER_CERT_IMAGE1,
+      </if>
+      <if test="nextOrder != null" >
+        ORDER_NEXT_ORDER,
+      </if>
+      <if test="nextEndDate != null" >
+        ORDER_NEXT_END_DATE,
+      </if>
+      <if test="nextAmount != null" >
+        ORDER_NEXT_AMOUNT,
+      </if>
+      <if test="returnCellTime != null" >
+        ORDER_RETURN_CELL_TIME,
+      </if>
+      <if test="unit != null" >
+        ORDER_UNIT,
+      </if>
+      <if test="number != null" >
+        ORDER_NUMBER,
+      </if>
+      <if test="isDisplay != null" >
+        ORDER_IS_DISPLAY,
+      </if>
+      <if test="ORDER_PASSWORD != null" >
+        ORDER_PASSWORD,
+      </if>
+      <if test="totalTimes != null" >
+        ORDER_TOTAL_TIMES,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=VARCHAR},
+      <if test="memberId != null" >
+        #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="wahoceId != null" >
+        #{wahoceId,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null" >
+        #{startDate,jdbcType=VARCHAR},
+      </if>
+      <if test="endDate != null" >
+        #{endDate,jdbcType=VARCHAR},
+      </if>
+      <if test="cuseMemo != null" >
+        #{cuseMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=VARCHAR},
+      </if>
+      <if test="persId != null" >
+        #{persId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="custMemo != null" >
+        #{custMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="saleMemo != null" >
+        #{saleMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="custName != null" >
+        #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="custTel != null" >
+        #{custTel,jdbcType=VARCHAR},
+      </if>
+      <if test="custAddr != null" >
+        #{custAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="idNumber != null" >
+        #{idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="deposit1 != null" >
+        #{deposit1,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="amountType != null" >
+        #{amountType,jdbcType=VARCHAR},
+      </if>
+      <if test="typeMoeny != null" >
+        #{typeMoeny,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="certType != null" >
+        #{certType,jdbcType=VARCHAR},
+      </if>
+      <if test="contractCode != null" >
+        #{contractCode,jdbcType=VARCHAR},
+      </if>
+      <if test="depositMemo != null" >
+        #{depositMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="depositStatus != null" >
+        #{depositStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="depositpayAccount != null" >
+        #{depositpayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="refundAccount != null" >
+        #{refundAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="exeAccount != null" >
+        #{exeAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="depositRememo != null" >
+        #{depositRememo,jdbcType=VARCHAR},
+      </if>
+      <if test="depositReturn != null" >
+        #{depositReturn,jdbcType=VARCHAR},
+      </if>
+      <if test="amountReturn != null" >
+        #{amountReturn,jdbcType=VARCHAR},
+      </if>
+      <if test="overDate != null" >
+        #{overDate,jdbcType=VARCHAR},
+      </if>
+      <if test="certImage != null" >
+        #{certImage,jdbcType=VARCHAR},
+      </if>
+      <if test="certImage1 != null" >
+        #{certImage1,jdbcType=VARCHAR},
+      </if>
+      <if test="nextOrder != null" >
+        #{nextOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="nextEndDate != null" >
+        #{nextEndDate,jdbcType=VARCHAR},
+      </if>
+      <if test="nextAmount != null" >
+        #{nextAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="returnCellTime != null" >
+        #{returnCellTime,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisplay != null" >
+        #{isDisplay,jdbcType=VARCHAR},
+      </if>
+      <if test="ORDER_PASSWORD != null" >
+        #{ORDER_PASSWORD,jdbcType=VARCHAR},
+      </if>
+      <if test="totalTimes != null" >
+        #{totalTimes,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.whc.aip.storage.model.order.OrderExample" resultType="java.lang.Integer" >
+    select count(*) from WHC_ORDER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update WHC_ORDER
+    <set >
+      <if test="record.id != null" >
+        ORDER_ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberId != null" >
+        MEMBER_ID = #{record.memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wahoceId != null" >
+        WAHOCE_ID = #{record.wahoceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startDate != null" >
+        ORDER_START_DATE = #{record.startDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endDate != null" >
+        ORDER_END_DATE = #{record.endDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cuseMemo != null" >
+        ORDER_CUSE_MEMO = #{record.cuseMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null" >
+        ORDER_AMOUNT = #{record.amount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.persId != null" >
+        PERS_ID = #{record.persId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        ORDER_STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        ORDER_TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        ORDER_CREATE_DATE = #{record.createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payType != null" >
+        ORDER_PAY_TYPE = #{record.payType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custMemo != null" >
+        ORDER_CUST_MEMO = #{record.custMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saleMemo != null" >
+        ORDER_SALE_MEMO = #{record.saleMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custName != null" >
+        ORDER_CUST_NAME = #{record.custName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custTel != null" >
+        ORDER_CUST_TEL = #{record.custTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custAddr != null" >
+        ORDER_CUST_ADDR = #{record.custAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.source != null" >
+        ORDER_SOURCE = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idNumber != null" >
+        ORDER_ID_NUMBER = #{record.idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deposit1 != null" >
+        ORDER_DEPOSIT1 = #{record.deposit1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalAmount != null" >
+        ORDER_TOTAL_AMOUNT = #{record.totalAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amountType != null" >
+        ORDER_AMOUNT_TYPE = #{record.amountType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeMoeny != null" >
+        ORDER_TYPE_MOENY = #{record.typeMoeny,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custId != null" >
+        CUST_ID = #{record.custId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certType != null" >
+        ORDER_CERT_TYPE = #{record.certType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractCode != null" >
+        CONTRACT_CODE = #{record.contractCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.depositMemo != null" >
+        ORDER_DEPOSIT_MEMO = #{record.depositMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.depositStatus != null" >
+        ORDER_DEPOSIT_STATUS = #{record.depositStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.depositpayAccount != null" >
+        ORDER_DEPOSITPAY_ACCOUNT = #{record.depositpayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refundAccount != null" >
+        ORDER_REFUND_ACCOUNT = #{record.refundAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        ORDER_PHONE = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exeAccount != null" >
+        ORDER_EXE_ACCOUNT = #{record.exeAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.depositRememo != null" >
+        ORDER_DEPOSIT_REMEMO = #{record.depositRememo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.depositReturn != null" >
+        ORDER_DEPOSIT_RETURN = #{record.depositReturn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amountReturn != null" >
+        ORDER_AMOUNT_RETURN = #{record.amountReturn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.overDate != null" >
+        ORDER_OVER_DATE = #{record.overDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certImage != null" >
+        ORDER_CERT_IMAGE = #{record.certImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certImage1 != null" >
+        ORDER_CERT_IMAGE1 = #{record.certImage1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nextOrder != null" >
+        ORDER_NEXT_ORDER = #{record.nextOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nextEndDate != null" >
+        ORDER_NEXT_END_DATE = #{record.nextEndDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nextAmount != null" >
+        ORDER_NEXT_AMOUNT = #{record.nextAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnCellTime != null" >
+        ORDER_RETURN_CELL_TIME = #{record.returnCellTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null" >
+        ORDER_UNIT = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        ORDER_NUMBER = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDisplay != null" >
+        ORDER_IS_DISPLAY = #{record.isDisplay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ORDER_PASSWORD != null" >
+        ORDER_PASSWORD = #{record.ORDER_PASSWORD,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalTimes != null" >
+        ORDER_TOTAL_TIMES = #{record.totalTimes,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update WHC_ORDER
+    set ORDER_ID = #{record.id,jdbcType=VARCHAR},
+      MEMBER_ID = #{record.memberId,jdbcType=VARCHAR},
+      WAHOCE_ID = #{record.wahoceId,jdbcType=VARCHAR},
+      ORDER_START_DATE = #{record.startDate,jdbcType=VARCHAR},
+      ORDER_END_DATE = #{record.endDate,jdbcType=VARCHAR},
+      ORDER_CUSE_MEMO = #{record.cuseMemo,jdbcType=VARCHAR},
+      ORDER_AMOUNT = #{record.amount,jdbcType=VARCHAR},
+      PERS_ID = #{record.persId,jdbcType=VARCHAR},
+      ORDER_STATUS = #{record.status,jdbcType=VARCHAR},
+      ORDER_TYPE = #{record.type,jdbcType=VARCHAR},
+      ORDER_CREATE_DATE = #{record.createDate,jdbcType=VARCHAR},
+      ORDER_PAY_TYPE = #{record.payType,jdbcType=VARCHAR},
+      ORDER_CUST_MEMO = #{record.custMemo,jdbcType=VARCHAR},
+      ORDER_SALE_MEMO = #{record.saleMemo,jdbcType=VARCHAR},
+      ORDER_CUST_NAME = #{record.custName,jdbcType=VARCHAR},
+      ORDER_CUST_TEL = #{record.custTel,jdbcType=VARCHAR},
+      ORDER_CUST_ADDR = #{record.custAddr,jdbcType=VARCHAR},
+      ORDER_SOURCE = #{record.source,jdbcType=VARCHAR},
+      ORDER_ID_NUMBER = #{record.idNumber,jdbcType=VARCHAR},
+      ORDER_DEPOSIT1 = #{record.deposit1,jdbcType=VARCHAR},
+      ORDER_TOTAL_AMOUNT = #{record.totalAmount,jdbcType=VARCHAR},
+      ORDER_AMOUNT_TYPE = #{record.amountType,jdbcType=VARCHAR},
+      ORDER_TYPE_MOENY = #{record.typeMoeny,jdbcType=VARCHAR},
+      CUST_ID = #{record.custId,jdbcType=VARCHAR},
+      ORDER_CERT_TYPE = #{record.certType,jdbcType=VARCHAR},
+      CONTRACT_CODE = #{record.contractCode,jdbcType=VARCHAR},
+      ORDER_DEPOSIT_MEMO = #{record.depositMemo,jdbcType=VARCHAR},
+      ORDER_DEPOSIT_STATUS = #{record.depositStatus,jdbcType=VARCHAR},
+      ORDER_DEPOSITPAY_ACCOUNT = #{record.depositpayAccount,jdbcType=VARCHAR},
+      ORDER_REFUND_ACCOUNT = #{record.refundAccount,jdbcType=VARCHAR},
+      ORDER_PHONE = #{record.phone,jdbcType=VARCHAR},
+      ORDER_EXE_ACCOUNT = #{record.exeAccount,jdbcType=VARCHAR},
+      ORDER_DEPOSIT_REMEMO = #{record.depositRememo,jdbcType=VARCHAR},
+      ORDER_DEPOSIT_RETURN = #{record.depositReturn,jdbcType=VARCHAR},
+      ORDER_AMOUNT_RETURN = #{record.amountReturn,jdbcType=VARCHAR},
+      ORDER_OVER_DATE = #{record.overDate,jdbcType=VARCHAR},
+      ORDER_CERT_IMAGE = #{record.certImage,jdbcType=VARCHAR},
+      ORDER_CERT_IMAGE1 = #{record.certImage1,jdbcType=VARCHAR},
+      ORDER_NEXT_ORDER = #{record.nextOrder,jdbcType=VARCHAR},
+      ORDER_NEXT_END_DATE = #{record.nextEndDate,jdbcType=VARCHAR},
+      ORDER_NEXT_AMOUNT = #{record.nextAmount,jdbcType=VARCHAR},
+      ORDER_RETURN_CELL_TIME = #{record.returnCellTime,jdbcType=VARCHAR},
+      ORDER_UNIT = #{record.unit,jdbcType=VARCHAR},
+      ORDER_NUMBER = #{record.number,jdbcType=VARCHAR},
+      ORDER_IS_DISPLAY = #{record.isDisplay,jdbcType=VARCHAR},
+      ORDER_PASSWORD = #{record.ORDER_PASSWORD,jdbcType=VARCHAR},
+      ORDER_TOTAL_TIMES = #{record.totalTimes,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.whc.aip.storage.model.order.Order" >
+    update WHC_ORDER
+    <set >
+      <if test="memberId != null" >
+        MEMBER_ID = #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="wahoceId != null" >
+        WAHOCE_ID = #{wahoceId,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null" >
+        ORDER_START_DATE = #{startDate,jdbcType=VARCHAR},
+      </if>
+      <if test="endDate != null" >
+        ORDER_END_DATE = #{endDate,jdbcType=VARCHAR},
+      </if>
+      <if test="cuseMemo != null" >
+        ORDER_CUSE_MEMO = #{cuseMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        ORDER_AMOUNT = #{amount,jdbcType=VARCHAR},
+      </if>
+      <if test="persId != null" >
+        PERS_ID = #{persId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        ORDER_STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        ORDER_TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        ORDER_CREATE_DATE = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        ORDER_PAY_TYPE = #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="custMemo != null" >
+        ORDER_CUST_MEMO = #{custMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="saleMemo != null" >
+        ORDER_SALE_MEMO = #{saleMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="custName != null" >
+        ORDER_CUST_NAME = #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="custTel != null" >
+        ORDER_CUST_TEL = #{custTel,jdbcType=VARCHAR},
+      </if>
+      <if test="custAddr != null" >
+        ORDER_CUST_ADDR = #{custAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        ORDER_SOURCE = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="idNumber != null" >
+        ORDER_ID_NUMBER = #{idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="deposit1 != null" >
+        ORDER_DEPOSIT1 = #{deposit1,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmount != null" >
+        ORDER_TOTAL_AMOUNT = #{totalAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="amountType != null" >
+        ORDER_AMOUNT_TYPE = #{amountType,jdbcType=VARCHAR},
+      </if>
+      <if test="typeMoeny != null" >
+        ORDER_TYPE_MOENY = #{typeMoeny,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        CUST_ID = #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="certType != null" >
+        ORDER_CERT_TYPE = #{certType,jdbcType=VARCHAR},
+      </if>
+      <if test="contractCode != null" >
+        CONTRACT_CODE = #{contractCode,jdbcType=VARCHAR},
+      </if>
+      <if test="depositMemo != null" >
+        ORDER_DEPOSIT_MEMO = #{depositMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="depositStatus != null" >
+        ORDER_DEPOSIT_STATUS = #{depositStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="depositpayAccount != null" >
+        ORDER_DEPOSITPAY_ACCOUNT = #{depositpayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="refundAccount != null" >
+        ORDER_REFUND_ACCOUNT = #{refundAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        ORDER_PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="exeAccount != null" >
+        ORDER_EXE_ACCOUNT = #{exeAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="depositRememo != null" >
+        ORDER_DEPOSIT_REMEMO = #{depositRememo,jdbcType=VARCHAR},
+      </if>
+      <if test="depositReturn != null" >
+        ORDER_DEPOSIT_RETURN = #{depositReturn,jdbcType=VARCHAR},
+      </if>
+      <if test="amountReturn != null" >
+        ORDER_AMOUNT_RETURN = #{amountReturn,jdbcType=VARCHAR},
+      </if>
+      <if test="overDate != null" >
+        ORDER_OVER_DATE = #{overDate,jdbcType=VARCHAR},
+      </if>
+      <if test="certImage != null" >
+        ORDER_CERT_IMAGE = #{certImage,jdbcType=VARCHAR},
+      </if>
+      <if test="certImage1 != null" >
+        ORDER_CERT_IMAGE1 = #{certImage1,jdbcType=VARCHAR},
+      </if>
+      <if test="nextOrder != null" >
+        ORDER_NEXT_ORDER = #{nextOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="nextEndDate != null" >
+        ORDER_NEXT_END_DATE = #{nextEndDate,jdbcType=VARCHAR},
+      </if>
+      <if test="nextAmount != null" >
+        ORDER_NEXT_AMOUNT = #{nextAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="returnCellTime != null" >
+        ORDER_RETURN_CELL_TIME = #{returnCellTime,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        ORDER_UNIT = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        ORDER_NUMBER = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisplay != null" >
+        ORDER_IS_DISPLAY = #{isDisplay,jdbcType=VARCHAR},
+      </if>
+      <if test="ORDER_PASSWORD != null" >
+        ORDER_PASSWORD = #{ORDER_PASSWORD,jdbcType=VARCHAR},
+      </if>
+      <if test="totalTimes != null" >
+        ORDER_TOTAL_TIMES = #{totalTimes,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ORDER_ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.whc.aip.storage.model.order.Order" >
+    update WHC_ORDER
+    set MEMBER_ID = #{memberId,jdbcType=VARCHAR},
+      WAHOCE_ID = #{wahoceId,jdbcType=VARCHAR},
+      ORDER_START_DATE = #{startDate,jdbcType=VARCHAR},
+      ORDER_END_DATE = #{endDate,jdbcType=VARCHAR},
+      ORDER_CUSE_MEMO = #{cuseMemo,jdbcType=VARCHAR},
+      ORDER_AMOUNT = #{amount,jdbcType=VARCHAR},
+      PERS_ID = #{persId,jdbcType=VARCHAR},
+      ORDER_STATUS = #{status,jdbcType=VARCHAR},
+      ORDER_TYPE = #{type,jdbcType=VARCHAR},
+      ORDER_CREATE_DATE = #{createDate,jdbcType=VARCHAR},
+      ORDER_PAY_TYPE = #{payType,jdbcType=VARCHAR},
+      ORDER_CUST_MEMO = #{custMemo,jdbcType=VARCHAR},
+      ORDER_SALE_MEMO = #{saleMemo,jdbcType=VARCHAR},
+      ORDER_CUST_NAME = #{custName,jdbcType=VARCHAR},
+      ORDER_CUST_TEL = #{custTel,jdbcType=VARCHAR},
+      ORDER_CUST_ADDR = #{custAddr,jdbcType=VARCHAR},
+      ORDER_SOURCE = #{source,jdbcType=VARCHAR},
+      ORDER_ID_NUMBER = #{idNumber,jdbcType=VARCHAR},
+      ORDER_DEPOSIT1 = #{deposit1,jdbcType=VARCHAR},
+      ORDER_TOTAL_AMOUNT = #{totalAmount,jdbcType=VARCHAR},
+      ORDER_AMOUNT_TYPE = #{amountType,jdbcType=VARCHAR},
+      ORDER_TYPE_MOENY = #{typeMoeny,jdbcType=VARCHAR},
+      CUST_ID = #{custId,jdbcType=VARCHAR},
+      ORDER_CERT_TYPE = #{certType,jdbcType=VARCHAR},
+      CONTRACT_CODE = #{contractCode,jdbcType=VARCHAR},
+      ORDER_DEPOSIT_MEMO = #{depositMemo,jdbcType=VARCHAR},
+      ORDER_DEPOSIT_STATUS = #{depositStatus,jdbcType=VARCHAR},
+      ORDER_DEPOSITPAY_ACCOUNT = #{depositpayAccount,jdbcType=VARCHAR},
+      ORDER_REFUND_ACCOUNT = #{refundAccount,jdbcType=VARCHAR},
+      ORDER_PHONE = #{phone,jdbcType=VARCHAR},
+      ORDER_EXE_ACCOUNT = #{exeAccount,jdbcType=VARCHAR},
+      ORDER_DEPOSIT_REMEMO = #{depositRememo,jdbcType=VARCHAR},
+      ORDER_DEPOSIT_RETURN = #{depositReturn,jdbcType=VARCHAR},
+      ORDER_AMOUNT_RETURN = #{amountReturn,jdbcType=VARCHAR},
+      ORDER_OVER_DATE = #{overDate,jdbcType=VARCHAR},
+      ORDER_CERT_IMAGE = #{certImage,jdbcType=VARCHAR},
+      ORDER_CERT_IMAGE1 = #{certImage1,jdbcType=VARCHAR},
+      ORDER_NEXT_ORDER = #{nextOrder,jdbcType=VARCHAR},
+      ORDER_NEXT_END_DATE = #{nextEndDate,jdbcType=VARCHAR},
+      ORDER_NEXT_AMOUNT = #{nextAmount,jdbcType=VARCHAR},
+      ORDER_RETURN_CELL_TIME = #{returnCellTime,jdbcType=VARCHAR},
+      ORDER_UNIT = #{unit,jdbcType=VARCHAR},
+      ORDER_NUMBER = #{number,jdbcType=VARCHAR},
+      ORDER_IS_DISPLAY = #{isDisplay,jdbcType=VARCHAR},
+      ORDER_PASSWORD = #{ORDER_PASSWORD,jdbcType=VARCHAR},
+      ORDER_TOTAL_TIMES = #{totalTimes,jdbcType=VARCHAR}
+    where ORDER_ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

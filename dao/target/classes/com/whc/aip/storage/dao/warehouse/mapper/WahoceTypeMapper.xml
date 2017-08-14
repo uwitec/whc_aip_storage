@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whc.aip.storage.dao.warehouse.WahoceTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.whc.aip.storage.model.warehouse.WahoceType" >
+    <id column="WATY_ID" property="id" jdbcType="VARCHAR" />
+    <result column="WATY_CODE" property="code" jdbcType="VARCHAR" />
+    <result column="WATY_NAME" property="name" jdbcType="VARCHAR" />
+    <result column="WATY_DESC" property="desc" jdbcType="VARCHAR" />
+    <result column="WATY_STATUS" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WATY_ID, WATY_CODE, WATY_NAME, WATY_DESC, WATY_STATUS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from WHC_WAHOCE_TYPE
+    where WATY_ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.whc.aip.storage.model.warehouse.WahoceType" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      select sys_guid() from dual
+    </selectKey>
+    insert into WHC_WAHOCE_TYPE (WATY_ID, WATY_CODE, WATY_NAME, 
+      WATY_DESC, WATY_STATUS)
+    values (#{id,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{desc,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.whc.aip.storage.model.warehouse.WahoceType" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      select sys_guid() from dual
+    </selectKey>
+    insert into WHC_WAHOCE_TYPE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      WATY_ID,
+      <if test="code != null" >
+        WATY_CODE,
+      </if>
+      <if test="name != null" >
+        WATY_NAME,
+      </if>
+      <if test="desc != null" >
+        WATY_DESC,
+      </if>
+      <if test="status != null" >
+        WATY_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=VARCHAR},
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null" >
+        #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.whc.aip.storage.model.warehouse.WahoceType" >
+    update WHC_WAHOCE_TYPE
+    <set >
+      <if test="code != null" >
+        WATY_CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        WATY_NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null" >
+        WATY_DESC = #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        WATY_STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WATY_ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.whc.aip.storage.model.warehouse.WahoceType" >
+    update WHC_WAHOCE_TYPE
+    set WATY_CODE = #{code,jdbcType=VARCHAR},
+      WATY_NAME = #{name,jdbcType=VARCHAR},
+      WATY_DESC = #{desc,jdbcType=VARCHAR},
+      WATY_STATUS = #{status,jdbcType=VARCHAR}
+    where WATY_ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
